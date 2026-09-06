@@ -280,3 +280,44 @@ class _NullProbe(LatencyProbe):
 
     def __init__(self):
         super().__init__(NetworkConfig(enabled=False))
+
+
+def sample_processes(interval: float = 0.4, cmdline: bool = True) -> list[ProcInfo]:
+    """Two-pass CPU sample of every process. Only `top` pays for this.
+
+    psutil's per-process cpu_percent needs two readings separated by time; a
+    single pass would report 0.0 for everything and blame the wrong process.
+    """
+    watched = []
+    for proc in psutil.process_iter():
+        try:
+            proc.cpu_percent()  # prime the delta
+            watched.append(proc)
+        except Exception:
+            continue
+
+    time.sleep(max(0.05, interval))
+
+    out: list[ProcInfo] = []
+    for proc in watched:
+        try:
+            with proc.oneshot():
+                mem = _safe(proc.memory_info)
+                args = None
+                if cmdline:
+                    parts = _safe(proc.cmdline) or []
+                    args = " ".join(parts).strip() or None
+                out.append(
+                    ProcInfo(
+                        pid=proc.pid,
+                        name=_safe(proc.name) or "?",
+                        cpu_pct=_safe(proc.cpu_percent, 0.0) or 0.0,
+                        rss_bytes=getattr(mem, "rss", None),
+                        rss_pct=_safe(proc.memory_percent),
+                        username=_safe(proc.username),
+                        cmdline=args,
+                    )
+                )
+        except Exception:
+            continue  # processes die mid-scan; that is not our problem
+    return out
