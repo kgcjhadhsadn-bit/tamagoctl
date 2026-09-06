@@ -13,7 +13,7 @@ from rich.console import Console
 from rich.table import Table
 from rich.text import Text
 
-from tamagoctl import fmt, roast, sprites, state as state_mod
+from tamagoctl import fmt, roast, session, sprites, state as state_mod
 from tamagoctl.config import (
     Config,
     NetworkConfig,
@@ -86,12 +86,29 @@ def default(
 def run(
     ctx: typer.Context,
     once: bool = typer.Option(False, "--once", help="Render a single frame and exit."),
+    ticks: Optional[int] = typer.Option(
+        None, "--ticks", min=1, hidden=True, help="Stop after N refreshes."
+    ),
 ) -> None:
     """Open the live pet. This is the default when you run `tamagoctl`."""
     opts = ctx.obj or {}
     cfg = resolve_config(opts.get("sass"), opts.get("no_network", False))
-    pet, tick, metrics = _one_shot_tick(cfg)
-    console.print(view(pet, tick, metrics, cfg, feed=[]))
+
+    if once:
+        pet, tick, metrics = _one_shot_tick(cfg)
+        console.print(view(pet, tick, metrics, cfg, feed=[]))
+        return
+
+    sess = session.build(cfg)
+    frame = sess.run(console, max_ticks=ticks)
+    console.print(_farewell(frame))
+
+
+def _farewell(frame: "session.Frame") -> str:
+    return (
+        f"\n[dim]{frame.pet.name} is at {frame.tick.health:.0f}/100 and "
+        f"{LABELS[frame.tick.mood]}. State saved.[/dim]"
+    )
 
 
 @app.command()
