@@ -40,6 +40,7 @@ class ProcInfo:
     rss_pct: float | None = None
     username: str | None = None
     cmdline: str | None = None
+    created_at: float | None = None
 
 
 @dataclass(frozen=True)
@@ -316,6 +317,7 @@ def sample_processes(interval: float = 0.4, cmdline: bool = True) -> list[ProcIn
                         rss_pct=_safe(proc.memory_percent),
                         username=_safe(proc.username),
                         cmdline=args,
+                        created_at=_safe(proc.create_time),
                     )
                 )
         except Exception:

@@ -13,7 +13,7 @@ from rich.console import Console
 from rich.table import Table
 from rich.text import Text
 
-from tamagoctl import fmt, roast, session, sprites, state as state_mod
+from tamagoctl import comments, fmt, roast, session, sprites, state as state_mod
 from tamagoctl.config import (
     Config,
     NetworkConfig,
@@ -199,6 +199,7 @@ def top(
     header.append(proc.name, style="bold red")
     header.append(f"  pid {proc.pid}", style="dim")
     console.print(header)
+    console.print(f"  [italic]{comments.roast(offender, cfg)}[/italic]")
     console.print(
         f"  [red]{offender.cpu_share:.1f}%[/red] cpu   "
         f"[red]{offender.ram_share:.1f}%[/red] ram"

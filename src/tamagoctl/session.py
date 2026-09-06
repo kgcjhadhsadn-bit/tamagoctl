@@ -126,6 +126,7 @@ class Session:
         """Record the visit on the way out."""
         now = self.clock()
         self.pet = state_mod.touch(self.pet, now=now, ran_for=now - self.started_at)
+        self.pet.sessions += 1
         state_mod.save(self.pet)
 
     # -- rendering ----------------------------------------------------------
@@ -163,3 +164,6 @@ def build(config: Config, pet: PetState | None = None) -> Session:
     if pet is None:
         pet, _ = state_mod.load_or_create()
     return Session(config, pet, MetricsCollector(config, hot_since=pet.cpu_hot_since))
+
+
+__all__ = ["Session", "Frame", "build", "MAX_DT_FACTOR", "SAVE_INTERVAL_S"]

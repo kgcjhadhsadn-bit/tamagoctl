@@ -31,12 +31,20 @@ def green(**overrides) -> Metrics:
         loss_ratio=0.0,
         battery_pct=96.0,
         power_plugged=True,
+        battery_secs_left=9000,
         uptime_s=3600.0,
         proc_count=310,
         browser_procs={"Chrome": 47},
         top_cpu_proc=ProcInfo(pid=4821, name="Chrome Helper (Renderer)", cpu_pct=142.3,
-                              rss_bytes=2 * 1024**3, rss_pct=12.5),
+                              rss_bytes=2 * 1024**3, rss_pct=12.5,
+                              username="you", cmdline="/opt/chrome --type=renderer",
+                              created_at=NOW - 7200),
+        top_ram_proc=ProcInfo(pid=901, name="java", cpu_pct=3.0,
+                              rss_bytes=5 * 1024**3, rss_pct=31.0,
+                              username="you", cmdline="java -Xmx8g -jar thing.jar",
+                              created_at=NOW - 90000),
         self_cpu_pct=0.3,
+        self_rss_bytes=18 * 1024**2,
     )
     return replace(base, **overrides) if overrides else base
 
