@@ -12,14 +12,11 @@ from tamagoctl.comments import (
     facts_for,
     narrator_for,
     pick,
-    render,
     roast,
     roast_facts,
 )
-from tamagoctl.config import Config
 from tamagoctl.health import step
 from tamagoctl.lines import Line, bank
-from tamagoctl.mood import Mood
 from tamagoctl.roast import pick_worst
 from tamagoctl.state import new_pet
 from tests import factories as f

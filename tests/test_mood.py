@@ -8,7 +8,7 @@ from dataclasses import replace
 
 import pytest
 
-from tamagoctl.config import Config, NetworkConfig, Thresholds
+from tamagoctl.config import NetworkConfig, Thresholds
 from tamagoctl.mood import DAMAGING, LABELS, PRIORITY, Mood, evaluate
 from tests import factories as f
 from tests.factories import CONFIG

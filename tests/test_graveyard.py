@@ -9,8 +9,7 @@ from typer.testing import CliRunner
 from tamagoctl import graveyard, state as state_mod
 from tamagoctl.cli import EXIT_OK, EXIT_UNHAPPY, app
 from tamagoctl.config import Config, NetworkConfig, graveyard_dir
-from tamagoctl.graveyard import Tombstone, bury, epitaph_for, graves, latest, make
-from tamagoctl.health import step
+from tamagoctl.graveyard import Tombstone, bury, epitaph_for, graves, latest
 from tamagoctl.lines import EPITAPHS
 from tamagoctl.session import Session
 from tamagoctl.state import new_pet

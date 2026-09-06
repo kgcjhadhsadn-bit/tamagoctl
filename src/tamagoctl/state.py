@@ -13,7 +13,7 @@ import time
 from dataclasses import asdict, dataclass, field, replace
 from pathlib import Path
 
-from tamagoctl.config import Config, state_path
+from tamagoctl.config import state_path
 
 SCHEMA_VERSION = 1
 

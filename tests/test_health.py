@@ -4,7 +4,7 @@ from dataclasses import replace
 
 import pytest
 
-from tamagoctl.config import Config, HealthRules
+from tamagoctl.config import HealthRules
 from tamagoctl.health import apply_health, bar, health_delta, step, time_to_live
 from tamagoctl.mood import Mood, evaluate
 from tests import factories as f

@@ -3,8 +3,6 @@
 import json
 import random
 
-import pytest
-
 from tamagoctl import state as state_mod
 from tamagoctl.config import state_path
 from tamagoctl.state import GUILT_THRESHOLD_S, PetState, load, new_pet, save, touch

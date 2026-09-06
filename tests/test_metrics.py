@@ -1,7 +1,6 @@
 """The metrics layer must degrade, never crash. Containers, VMs and servers all
 lie about something."""
 
-import time
 from dataclasses import replace
 
 import pytest

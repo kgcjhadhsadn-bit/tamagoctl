@@ -7,7 +7,7 @@ is only responsible for making them happen at the right moments.
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 
 from rich.console import Console
 from rich.live import Live

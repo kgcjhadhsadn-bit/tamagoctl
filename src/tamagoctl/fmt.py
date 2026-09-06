@@ -15,13 +15,21 @@ def duration(seconds: float | None, precision: int = 2) -> str:
         return f"{seconds * 1000:.0f}ms"
 
     units = (("d", 86400), ("h", 3600), ("m", 60), ("s", 1))
-    parts: list[str] = []
     remaining = int(seconds)
+    values: list[tuple[str, int]] = []
     for label, span in units:
         value, remaining = divmod(remaining, span)
-        if value:
-            parts.append(f"{value}{label}")
-    return " ".join(parts[:precision]) if parts else "0s"
+        values.append((label, value))
+
+    first = next((i for i, (_, value) in enumerate(values) if value), None)
+    if first is None:
+        return "0s"
+    # Consecutive magnitudes from the largest non-zero one, so 41 days and one
+    # minute reads as "41d" rather than the misleading "41d 1m".
+    window = values[first : first + precision]
+    while len(window) > 1 and window[-1][1] == 0:
+        window.pop()
+    return " ".join(f"{value}{label}" for label, value in window)
 
 
 def days(seconds: float | None) -> float:

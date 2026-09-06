@@ -6,8 +6,6 @@ render through exactly the same code path.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-
 from rich.align import Align
 from rich.console import Group, RenderableType
 from rich.panel import Panel
@@ -140,15 +138,27 @@ def head(state: PetState, tick: Tick, metrics: Metrics, cfg: Config) -> Table:
     return grid
 
 
+# Session.push formats every entry as "HH:MM:SS" plus two spaces, so the split
+# point is fixed and the timestamp can go in its own column.
+STAMP_WIDTH = 8
+STAMP_GAP = 2
+
+
 def feed_panel(lines: list[str], height: int) -> Panel:
-    body: list[Text] = []
+    """Timestamps in their own column so wrapped text aligns under the message."""
+    grid = Table.grid(padding=(0, 1), expand=True)
+    grid.add_column(width=STAMP_WIDTH, no_wrap=True, style="dim")
+    grid.add_column(ratio=1, overflow="fold")
+
     visible = lines[-height:] if height > 0 else lines
+    for _ in range(max(0, height - len(visible))):
+        grid.add_row("", "")
     for index, line in enumerate(visible):
+        stamp, text = line[:STAMP_WIDTH], line[STAMP_WIDTH + STAMP_GAP:]
         newest = index == len(visible) - 1
-        body.append(Text(line, style="white" if newest else "dim"))
-    while len(body) < height:
-        body.insert(0, Text(""))
-    return Panel(Group(*body), title="[dim]feed[/dim]", title_align="left",
+        grid.add_row(stamp, Text(text, style="white" if newest else "dim"))
+
+    return Panel(grid, title="[dim]feed[/dim]", title_align="left",
                  border_style="dim", padding=(0, 1))
 
 

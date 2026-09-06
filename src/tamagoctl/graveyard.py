@@ -14,7 +14,7 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 from tamagoctl import fmt
-from tamagoctl.config import Config, graveyard_dir
+from tamagoctl.config import graveyard_dir
 from tamagoctl.health import Tick
 from tamagoctl.lines import EPITAPH_FALLBACK, EPITAPHS
 from tamagoctl.metrics import Metrics

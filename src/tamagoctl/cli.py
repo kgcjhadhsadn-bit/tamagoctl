@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import time
 from dataclasses import replace
 from typing import Optional
 
@@ -14,19 +13,11 @@ from rich.table import Table
 from rich.text import Text
 
 from tamagoctl import comments, fmt, graveyard as graveyard_mod, roast, session, sprites, state as state_mod
-from tamagoctl.config import (
-    Config,
-    NetworkConfig,
-    clamp_sass,
-    config_path,
-    ensure_config,
-    home,
-    load_config,
-)
+from tamagoctl.config import Config, clamp_sass, ensure_config, home, load_config
 from tamagoctl.health import Tick, step, time_to_live
 from tamagoctl.metrics import Metrics, one_shot, sample_processes
-from tamagoctl.mood import LABELS, Mood
-from tamagoctl.tui import health_bar, view
+from tamagoctl.mood import LABELS
+from tamagoctl.tui import view
 
 app = typer.Typer(
     add_completion=False,
