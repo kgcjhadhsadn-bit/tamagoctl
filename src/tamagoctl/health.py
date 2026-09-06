@@ -25,7 +25,9 @@ class Tick:
 
     @property
     def mood(self) -> Mood:
-        return Mood.DEAD if self.died else self.verdict.mood
+        # Keyed on health, not on `died`: `died` is the transition and fires once,
+        # but the pet stays dead on every tick after it.
+        return Mood.DEAD if self.health <= 0.0 else self.verdict.mood
 
     @property
     def dying(self) -> bool:

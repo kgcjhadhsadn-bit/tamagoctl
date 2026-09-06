@@ -12,9 +12,11 @@ from dataclasses import dataclass, replace
 from rich.console import Console
 from rich.live import Live
 
-from tamagoctl import comments, state as state_mod
+from tamagoctl import comments, graveyard, state as state_mod
 from tamagoctl.config import Config
 from tamagoctl.health import Tick, step
+from pathlib import Path
+
 from tamagoctl.metrics import Metrics, MetricsCollector
 from tamagoctl.state import PetState
 from tamagoctl.tui import view
@@ -59,6 +61,8 @@ class Session:
         self.last_save_at = self.started_at
         self.last_self_report_at = self.started_at
         self.ticks = 0
+        self.died = False
+        self.grave: "Path | None" = None
 
     # -- feed ---------------------------------------------------------------
 
@@ -100,10 +104,25 @@ class Session:
             # The greeting needs a sample to talk about, but it has to lead the feed.
             self.greet(metrics)
 
-        self.push(self.narrator.observe(self.pet, tick, metrics, self.config), at=metrics.now)
-        self._maybe_self_report(metrics)
-        self._maybe_save(metrics.now)
+        if tick.died:
+            self._die(tick, metrics)
+        else:
+            self.push(
+                self.narrator.observe(self.pet, tick, metrics, self.config), at=metrics.now
+            )
+            self._maybe_self_report(metrics)
+
+        self._maybe_save(metrics.now, force=tick.died)
         return Frame(tick, metrics, self.pet)
+
+    def _die(self, tick: Tick, metrics: Metrics) -> None:
+        """Health hit zero. Write the tombstone once and say so."""
+        stone = graveyard.make(self.pet, tick, metrics)
+        self.grave = graveyard.bury(stone)
+        self.died = True
+        self.push(self.narrator.eulogy(self.pet, tick, metrics, self.config), at=metrics.now)
+        self.push(f"Epitaph: {stone.epitaph}", at=metrics.now)
+        self.push("Run `tamagoctl revive` when you are ready.", at=metrics.now)
 
     def _maybe_self_report(self, metrics: Metrics) -> None:
         """It reports its own CPU usage on a timer, apologetically."""

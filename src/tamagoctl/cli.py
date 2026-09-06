@@ -13,7 +13,7 @@ from rich.console import Console
 from rich.table import Table
 from rich.text import Text
 
-from tamagoctl import comments, fmt, roast, session, sprites, state as state_mod
+from tamagoctl import comments, fmt, graveyard as graveyard_mod, roast, session, sprites, state as state_mod
 from tamagoctl.config import (
     Config,
     NetworkConfig,
@@ -225,6 +225,98 @@ def top(
             )
         console.print()
         console.print(table)
+
+
+@app.command()
+def graveyard(
+    limit: int = typer.Option(20, "--limit", "-n", min=1, help="How many to list."),
+) -> None:
+    """List the pets that did not make it."""
+    stones = graveyard_mod.graves()
+    if not stones:
+        console.print("[dim]The graveyard is empty. So far.[/dim]")
+        return
+
+    console.print(sprites.headstone(stones[-1].name, stones[-1].generation))
+    console.print(f"[italic dim]{stones[-1].epitaph}[/italic dim]\n")
+
+    table = Table(box=None, padding=(0, 2), header_style="dim")
+    table.add_column("gen", justify="right", style="dim")
+    table.add_column("name")
+    table.add_column("lived")
+    table.add_column("killed by", style="red")
+    table.add_column("cause", style="dim", overflow="fold")
+    for stone in list(reversed(stones))[:limit]:
+        table.add_row(
+            str(stone.generation), stone.name, stone.lifespan,
+            stone.killer or "-", stone.cause,
+        )
+    console.print(table)
+
+    hidden = max(0, len(stones) - limit)
+    if hidden:
+        console.print(f"\n[dim]{hidden} more not shown.[/dim]")
+
+
+@app.command()
+def revive(
+    ctx: typer.Context,
+    force: bool = typer.Option(
+        False, "--force", help="Replace a pet that is still alive. It will be buried."
+    ),
+) -> None:
+    """Hatch a new pet. It will know about its predecessor."""
+    opts = ctx.obj or {}
+    cfg = resolve_config(opts.get("sass"), opts.get("no_network", False))
+    current, is_new = state_mod.load_or_create()
+
+    if is_new:
+        state_mod.save(current)
+        console.print(f"There was no pet. There is now: [bold]{current.name}[/bold].")
+        return
+
+    if current.alive and not force:
+        console.print(
+            f"[yellow]{current.name} is still alive[/yellow] at "
+            f"{current.health:.0f}/100. Use [bold]--force[/bold] to replace them anyway."
+        )
+        raise typer.Exit(EXIT_UNHAPPY)
+
+    predecessor = _bury_if_needed(current, cfg, force)
+    fresh = state_mod.new_pet(
+        generation=current.generation + 1, predecessor=predecessor
+    )
+    state_mod.save(fresh)
+
+    console.print(
+        f"[bold]{fresh.name}[/bold], generation {fresh.generation}, "
+        f"{fresh.health:.0f}/100."
+    )
+    if predecessor:
+        console.print(
+            f"[dim]Successor to {predecessor['name']}, "
+            f"who died of: {predecessor.get('cause', 'unknown')}[/dim]"
+        )
+
+
+def _bury_if_needed(current: state_mod.PetState, cfg: Config, forced: bool) -> dict | None:
+    """A pet that died in a session already has a grave; a forced one does not."""
+    existing = graveyard_mod.find_by_birth(current.born_at)
+    if existing is not None:
+        return existing.as_predecessor()
+
+    metrics = one_shot(cfg)
+    tick = step(metrics, max(current.health, 0.0), 0.0, cfg)
+    stone = graveyard_mod.make(current, tick, metrics)
+    if forced and current.alive:
+        stone = replace(
+            stone,
+            cause="Replaced by their owner while still alive.",
+            killer=None,
+            epitaph="Did nothing wrong.",
+        )
+    graveyard_mod.bury(stone)
+    return stone.as_predecessor()
 
 
 @config_app.command("path")

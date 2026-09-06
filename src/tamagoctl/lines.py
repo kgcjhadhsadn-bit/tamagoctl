@@ -396,3 +396,45 @@ BY_MOOD = {
     "content": CONTENT,
     "dead": DEAD,
 }
+
+
+# Written to the tombstone, so these are permanent. Dry, not zany. Keyed by the
+# metric that did it; the fallback covers a death with no attributable killer.
+EPITAPHS: dict[str, tuple[str, ...]] = {
+    "cpu": (
+        "Ran hot. Ran out.",
+        "Died as it lived: at 100% utilisation.",
+        "The fans stopped first.",
+        "Sustained load, unsustained pet.",
+    ),
+    "ram": (
+        "Wanted more than there was.",
+        "Out of memory, and then out of time.",
+        "The OOM killer got there first.",
+        "Swapped until there was nothing left to swap.",
+    ),
+    "disk": (
+        "Filled up. Gave up.",
+        "No space left on device.",
+        "Died of a full Downloads folder.",
+        "There was nowhere left to write this.",
+    ),
+    "net": (
+        "Lost too many packets to come back.",
+        "Timed out.",
+        "Last seen 150ms away.",
+        "The connection was the problem, in the end.",
+    ),
+    "battery": (
+        "The wall was right there.",
+        "Discharged.",
+        "Ran out of power at 0%, as designed.",
+        "Nobody plugged it in.",
+    ),
+}
+
+EPITAPH_FALLBACK = (
+    "Cause undetermined. Health simply ran out.",
+    "Died of general neglect.",
+    "No single metric took the blame.",
+)
