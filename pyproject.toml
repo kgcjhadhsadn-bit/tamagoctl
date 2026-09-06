@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tamagoctl"
+version = "0.1.0"
+description = "A terminal pet whose mood and health are driven by real system metrics."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+keywords = ["tamagotchi", "system-monitor", "cli", "tui", "psutil"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: System :: Monitoring",
+]
+dependencies = [
+    "psutil>=5.9",
+    "rich>=13.0",
+    "typer>=0.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.urls]
+Homepage = "https://github.com/kgcjhadhsadn-bit/tamagoctl"
+
+[project.scripts]
+tamagoctl = "tamagoctl.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/tamagoctl"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
