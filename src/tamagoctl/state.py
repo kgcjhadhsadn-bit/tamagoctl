@@ -43,7 +43,6 @@ class PetState:
     predecessor: dict | None = None
     recent_comments: list[str] = field(default_factory=list)
     total_runtime_s: float = 0.0
-    sessions: int = 0
     cpu_hot_since: float | None = None
     last_self_report_at: float = 0.0
     schema_version: int = SCHEMA_VERSION

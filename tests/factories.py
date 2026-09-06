@@ -22,7 +22,6 @@ def green(**overrides) -> Metrics:
         ram_pct=41.0,
         ram_used_bytes=6 * 1024**3,
         ram_total_bytes=16 * 1024**3,
-        swap_pct=0.0,
         disk_free_pct=62.0,
         disk_free_bytes=300 * 1024**3,
         disk_path="/",

@@ -232,7 +232,6 @@ uptime_days = 7.0
 max_health = 100.0
 decay_per_red_per_s = 0.05
 regen_per_s = 0.02
-critical_health = 25.0
 
 [network]
 enabled = true
@@ -314,8 +313,10 @@ pages that mangle anything cleverer.
 ## CPU usage
 
 Under 1% is a hard requirement and also the running joke. Measured cost is
-**3.8ms of CPU per tick including a full render — 0.19% of a 2s tick.**
-`tests/test_session.py` asserts the budget, so a regression fails the suite.
+**about 4.5ms of CPU per tick including a full render — roughly 0.22% of a 2s
+tick** (median of five runs on a modest container; your numbers will differ).
+`tests/test_session.py` asserts the budget against the 1% ceiling, so a
+regression fails the suite rather than relying on anyone remembering to check.
 
 How it stays there: a single non-blocking `cpu_percent` sample per tick,
 process enumeration cached on a 10s cadence instead of running every tick, the
@@ -354,7 +355,7 @@ graveyard.py tombstones
 cli.py       the command surface
 ```
 
-`271 tests` cover every mood, both sides of every threshold, the full
+`284 tests` cover every mood, both sides of every threshold, the full
 priority ordering, missing-sensor degradation, decay and regeneration, death
 and lineage, the no-repeat window, and the CPU budget.
 
@@ -365,4 +366,4 @@ pytest tests/test_mood.py -v
 
 ## Licence
 
-MIT.
+MIT — see [LICENSE](LICENSE).

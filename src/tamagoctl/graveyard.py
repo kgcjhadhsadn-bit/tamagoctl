@@ -166,7 +166,3 @@ def find_by_birth(born_at: float, directory: Path | None = None) -> Tombstone | 
         if stone.born_at == born_at:
             return stone
     return None
-
-
-def count(directory: Path | None = None) -> int:
-    return len(graves(directory))

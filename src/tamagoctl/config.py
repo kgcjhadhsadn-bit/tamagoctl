@@ -56,7 +56,6 @@ class HealthRules:
     # One red metric drains a full-health pet in ~33 minutes. Three do it in ~11.
     decay_per_red_per_s: float = 0.05
     regen_per_s: float = 0.02
-    critical_health: float = 25.0
 
 
 @dataclass(frozen=True)
@@ -112,7 +111,6 @@ uptime_days = 7.0     # -> smug
 max_health = 100.0
 decay_per_red_per_s = 0.05  # per red metric
 regen_per_s = 0.02          # only while everything is green
-critical_health = 25.0
 
 [network]
 enabled = true    # the only network call in the program; false disables `dizzy`

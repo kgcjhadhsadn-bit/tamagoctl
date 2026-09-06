@@ -165,7 +165,6 @@ class TestPersistence:
         sess.finish()
         saved = state_mod.load()
         assert saved.last_seen_at == pytest.approx(f.NOW)
-        assert saved.sessions >= 0
 
     def test_health_survives_the_round_trip(self):
         sess = make_session([f.bloated(now=f.NOW), f.bloated(now=f.NOW + 100)])

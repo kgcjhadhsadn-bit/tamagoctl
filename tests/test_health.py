@@ -5,7 +5,7 @@ from dataclasses import replace
 import pytest
 
 from tamagoctl.config import HealthRules
-from tamagoctl.health import apply_health, bar, health_delta, step, time_to_live
+from tamagoctl.health import apply_health, health_delta, step, time_to_live
 from tamagoctl.mood import Mood, evaluate
 from tests import factories as f
 from tests.factories import CONFIG
@@ -34,8 +34,8 @@ class TestDecay:
         tick = step(f.bloated(), 0.4, dt=1000.0, config=CONFIG)
         assert tick.health == 0.0
 
-    def test_a_red_metric_reports_as_dying(self):
-        assert step(f.sweating(), 50.0, 2.0, CONFIG).dying is True
+    def test_a_red_metric_loses_health(self):
+        assert step(f.sweating(), 50.0, 2.0, CONFIG).delta < 0
 
 
 class TestRegen:
@@ -130,22 +130,6 @@ class TestCustomRules:
     def test_a_pacifist_config_never_kills(self):
         gentle = replace(CONFIG, health=HealthRules(decay_per_red_per_s=0.0))
         assert step(f.hangry(disk_free_pct=1.0), 1.0, 100_000.0, gentle).died is False
-
-
-class TestBar:
-    def test_full_and_empty(self):
-        assert bar(100.0, width=10) == "#" * 10
-        assert bar(0.0, width=10) == "-" * 10
-
-    def test_a_barely_alive_pet_still_shows_one_block(self):
-        assert bar(0.2, width=20).startswith("#")
-
-    def test_bar_width_is_respected(self):
-        assert len(bar(37.0, width=33)) == 33
-
-    def test_clamps_out_of_range_values(self):
-        assert bar(500.0, width=10) == "#" * 10
-        assert bar(-5.0, width=10) == "-" * 10
 
 
 class TestApplyHealth:

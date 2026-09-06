@@ -53,7 +53,6 @@ class Metrics:
     ram_pct: float | None = None
     ram_used_bytes: int | None = None
     ram_total_bytes: int | None = None
-    swap_pct: float | None = None
     disk_free_pct: float | None = None
     disk_free_bytes: int | None = None
     disk_path: str | None = None
@@ -64,7 +63,6 @@ class Metrics:
     power_plugged: bool | None = None
     battery_secs_left: int | None = None
     uptime_s: float | None = None
-    load1: float | None = None
     proc_count: int | None = None
     browser_procs: dict[str, int] = field(default_factory=dict)
     top_cpu_proc: ProcInfo | None = None
@@ -202,11 +200,9 @@ class MetricsCollector:
         hot_since = self.tracker.update(cpu, th.cpu_pct, now)
 
         vmem = _safe(psutil.virtual_memory)
-        smem = _safe(psutil.swap_memory)
         disk = _safe(lambda: psutil.disk_usage(self._disk_path))
         battery = _safe(lambda: getattr(psutil, "sensors_battery", lambda: None)())
         boot = _safe(psutil.boot_time)
-        load = _safe(lambda: os.getloadavg()[0]) if hasattr(os, "getloadavg") else None
 
         latency: LatencyResult = self.probe.read()
         procs = self._scan_processes(now)
@@ -234,7 +230,6 @@ class MetricsCollector:
             ram_pct=getattr(vmem, "percent", None),
             ram_used_bytes=getattr(vmem, "used", None),
             ram_total_bytes=getattr(vmem, "total", None),
-            swap_pct=getattr(smem, "percent", None),
             disk_free_pct=(
                 100.0 - disk.percent if disk is not None and disk.percent is not None else None
             ),
@@ -247,7 +242,6 @@ class MetricsCollector:
             power_plugged=getattr(battery, "power_plugged", None),
             battery_secs_left=secs_left,
             uptime_s=(now - boot) if boot else None,
-            load1=load,
             proc_count=procs.get("count"),
             browser_procs=dict(procs.get("browsers") or {}),
             top_cpu_proc=procs.get("top_cpu"),

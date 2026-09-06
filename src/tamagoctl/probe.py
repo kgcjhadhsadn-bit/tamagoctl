@@ -24,11 +24,9 @@ class LatencyResult:
     at: float
 
 
-UNKNOWN = LatencyResult(None, None, None, 0.0)
-
 
 def probe_once(cfg: NetworkConfig, now: float | None = None) -> LatencyResult:
-    """Synchronous probe. Returns UNKNOWN-ish values when disabled or unreachable."""
+    """Synchronous probe. Reports nothing when disabled or unreachable."""
     now = time.time() if now is None else now
     if not cfg.enabled:
         return LatencyResult(None, None, None, now)

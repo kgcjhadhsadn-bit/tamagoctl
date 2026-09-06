@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "A terminal pet whose mood and health are driven by real system metrics."
 readme = "README.md"
 requires-python = ">=3.11"
-license = { text = "MIT" }
+license = { file = "LICENSE" }
 keywords = ["tamagotchi", "system-monitor", "cli", "tui", "psutil"]
 classifiers = [
     "Environment :: Console",

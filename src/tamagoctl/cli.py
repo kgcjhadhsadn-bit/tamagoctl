@@ -139,6 +139,7 @@ def _status_payload(pet: state_mod.PetState, tick: Tick, metrics: Metrics) -> di
             "label": LABELS[tick.mood],
             "alive": tick.health > 0,
             "age_s": round(pet.age_s(metrics.now), 1),
+            "total_runtime_s": round(pet.total_runtime_s, 1),
         },
         "verdict": {
             "red": list(tick.verdict.red),
