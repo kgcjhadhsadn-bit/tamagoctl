@@ -1,0 +1,39 @@
+# Kudłacze core — SURVIVAL + DZIAŁKI (brakujące klucze z domyślnego config.yml w jarze)
+serwer: ${CFG_SERVER_NAME}
+strefa-czasowa: Europe/Warsaw
+domena: ${CFG_SERVER_DOMAIN}
+discord-zaproszenie: ${CFG_DISCORD_INVITE}
+
+baza:
+  host: ${CFG_DB_HOST}
+  port: ${CFG_DB_PORT}
+  nazwa: ${CFG_DB_NAME}
+  uzytkownik: ${CFG_DB_USER}
+  haslo: ${CFG_DB_PASSWORD}
+  pula: 6
+  watki: 4
+
+waluta:
+  sekret-przedmiotow: ${CFG_KC_ITEM_SECRET}
+
+moduly:
+  waluta: true
+  rangi: true
+  smierc: true
+  perki: true
+  czat: true
+  drwal: true
+  strefa-vip: true
+  lobby: false
+  bootstrap: true
+  siec: true
+  info: true
+
+# Śmierć = kick + blokada wejścia na 5 minut (UVIP+ omija: kudlacze.death.nokick)
+smierc:
+  tryb: KICK_AND_LOCK
+  blokada-minut: 5
+
+bootstrap:
+  buduj-spawn: true
+  ochrona-spawnu-promien: 150

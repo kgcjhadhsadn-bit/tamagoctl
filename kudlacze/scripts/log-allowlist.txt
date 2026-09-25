@@ -37,3 +37,7 @@ LibertyBans attempted to register '/(ban|mute|kick|unban|unbanip)'
 
 # CoreProtect: wewnętrzna pula HikariCP ma keepaliveTime >= maxLifetime (nie da się tego skonfigurować).
 HikariPool-1 - keepaliveTime is greater than or equal to maxLifetime
+
+# Velocity loguje jako ERROR każdą odmowę wejścia na backend (blokada po śmierci, ban, zła wersja
+# klienta) — to oczekiwane działanie zasad serwera, a nie awaria.
+disconnected while connecting to (lobby|survival|seasons):

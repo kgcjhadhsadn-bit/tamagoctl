@@ -1,7 +1,6 @@
 # =====================================================================
 #  Kudłacze — bootstrap lobby (NPC, hologramy, spawn).
-#  Plugin core wykonuje ten plik jednorazowo (po zmianie treści ponownie), a ręcznie:
-#      scripts/lib/rcon-apply.sh bootstrap/lobby.txt lobby
+#  Plugin core wykonuje ten plik po każdej zmianie jego treści (ręcznie: /kudlaczeadmin bootstrap).
 #  Komendy FancyNpcs / DecentHolograms są idempotentne (istniejący obiekt = komunikat, bez zmian).
 # =====================================================================
 setworldspawn 0 -60 0
@@ -19,7 +18,9 @@ time set 6000
 weather clear
 
 # --- Przewoźnik: selektor trybów ---
+npc remove Przewoznik
 npc create Przewoznik --location 0.5 -60 6.5 --world world
+npc type Przewoznik WANDERING_TRADER
 npc displayname Przewoznik <gradient:#c77dff:#7b2cbf><b>Przewoźnik</b></gradient>
 npc turn_to_player Przewoznik true
 npc glowing Przewoznik light_purple
@@ -28,6 +29,7 @@ npc action Przewoznik any_click add player_command serwery
 npc interaction_cooldown Przewoznik 1s
 
 # --- Hologramy ---
+dh delete powitanie
 dh create powitanie -l:world:0.5:-57.5:3.5 <#c77dff>&lKUDŁACZE
 dh line add powitanie 1 &fSerwer z kudłami! &6SURVIVAL + DZIAŁKI
 dh line add powitanie 1 &7Kliknij &5Przewoźnika&7, aby wybrać tryb

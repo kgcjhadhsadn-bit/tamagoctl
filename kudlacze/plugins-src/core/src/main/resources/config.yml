@@ -1,0 +1,89 @@
+# =====================================================================
+#  Kudłacze — plugin core (config.yml)
+#  Ten plik jest domyślny (z jara). Konfiguracja serwerów sieci leży w repozytorium:
+#  servers/<serwer>/plugins/KudlaczeCore/config.yml
+# =====================================================================
+
+# Nazwa serwera w sieci (lobby / survival / seasons) — obraz dockera podstawia ${CFG_SERVER_NAME}
+serwer: ${CFG_SERVER_NAME}
+strefa-czasowa: Europe/Warsaw
+domena: ${CFG_SERVER_DOMAIN}
+discord-zaproszenie: ${CFG_DISCORD_INVITE}
+
+baza:
+  host: ${CFG_DB_HOST}
+  port: ${CFG_DB_PORT}
+  nazwa: ${CFG_DB_NAME}
+  uzytkownik: ${CFG_DB_USER}
+  haslo: ${CFG_DB_PASSWORD}
+  pula: 6
+  watki: 4
+
+moduly:
+  waluta: true
+  rangi: true
+  smierc: false
+  perki: true
+  czat: true
+  drwal: false
+  strefa-vip: false
+  lobby: false
+  bootstrap: true
+  siec: true
+  info: true
+
+waluta:
+  # sekret HMAC przedmiotów KC — ten sam na wszystkich serwerach (KC_ITEM_SECRET w .env)
+  sekret-przedmiotow: ${CFG_KC_ITEM_SECRET}
+
+smierc:
+  # KICK | KICK_AND_LOCK | DISABLED
+  tryb: KICK
+  blokada-minut: 5
+
+perki:
+  piec-cooldown-sekund: 10
+
+czat:
+  format: '<tytul><prefiks><nick><sufiks><dark_gray> » </dark_gray><wiadomosc>'
+  powtorzenie-sekund: 5
+  # domeny, które wolno pisać na czacie (poza domeną serwera)
+  dozwolone-domeny:
+    - discord.gg
+    - youtube.com
+    - youtu.be
+
+drwal:
+  limit-blokow: 96
+  minimum-lisci: 4
+  kucanie-wylacza: true
+  siekiera-netherytowa: false
+  siekiery: [WOODEN_AXE, STONE_AXE, COPPER_AXE, IRON_AXE, GOLDEN_AXE, DIAMOND_AXE]
+
+# Skarbnik (strefa VIP). Oczekiwanie: ~0,7 KC dziennie ≈ 5 KC tygodniowo (docs/EKONOMIA.md).
+nagroda-codzienna:
+  nagrody:
+    - {waga: 50, kc: 1, opis: '<light_purple>1 Kłak Czarodzieja'}
+    - {waga: 10, kc: 2, opis: '<light_purple>2 Kłaki Czarodzieja'}
+    - {waga: 25, pieniadze: 250, opis: '<green>250 zł'}
+    - {waga: 15, przedmioty: ['GOLDEN_APPLE:2', 'EXPERIENCE_BOTTLE:16'], opis: '<gold>2 złote jabłka i 16 butelek doświadczenia'}
+
+expiarka:
+  co-ile-sekund: 4
+  max-mobow: 6
+  promien-gracza: 10
+  xp-za-moba: 5
+
+lobby:
+  spawn: {x: 0.5, y: -60.0, z: 0.5, yaw: 0.0, pitch: 0.0}
+  pustka-y: -70
+
+bootstrap:
+  buduj-spawn: false
+  ochrona-spawnu-promien: 150
+
+siec:
+  serwery: [lobby, survival, seasons]
+
+yt:
+  cooldown-minut: 30

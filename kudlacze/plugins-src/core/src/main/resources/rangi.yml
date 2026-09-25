@@ -1,0 +1,71 @@
+# =====================================================================
+#  Kudłacze — rangi zdobywane W GRZE za Kłaki Czarodzieja (KC)
+#  Wymiana u NPC Czarodziej Kudłacz (/rangi). Każda ranga trwa 'dni' dni albo do nowej
+#  edycji survivalu (co pierwsze). 'wymaga' = ranga, którą trzeba mieć, żeby kupić tę.
+#  Perki nadają grupy LuckPerms (permissions/luckperms.txt) — tu tylko opis w menu.
+# =====================================================================
+rangi:
+  vip:
+    nazwa: '<green><bold>VIP</bold>'
+    grupa: vip
+    koszt: 80
+    dni: 30
+    ikona: EMERALD
+    perki:
+      - '15 działek (większe: 31x31), 5 domów (/sethome)'
+      - 'strefa VIP z expiarką'
+      - 'codzienna nagroda u Skarbnika'
+      - '/kit vip, rezerwacja slotu'
+  svip:
+    nazwa: '<dark_green><bold>SVIP</bold>'
+    grupa: svip
+    koszt: 80
+    wymaga: vip
+    dni: 30
+    ikona: ENDER_CHEST
+    perki:
+      - '30 działek, 10 domów'
+      - '/ec (enderchest), /wb (warsztat)'
+      - 'x1,5 doświadczenia'
+  mvip:
+    nazwa: '<aqua><bold>MVIP</bold>'
+    grupa: mvip
+    koszt: 80
+    wymaga: svip
+    dni: 30
+    ikona: ENDER_PEARL
+    perki:
+      - '45 działek, 15 domów'
+      - 'teleport bez czekania'
+      - 'kolory na tabliczkach i czacie'
+  uvip:
+    nazwa: '<blue><bold>UVIP</bold>'
+    grupa: uvip
+    koszt: 80
+    wymaga: mvip
+    dni: 30
+    ikona: TOTEM_OF_UNDYING
+    perki:
+      - '60 działek, 20 domów'
+      - '/back, brak blokady po śmierci'
+      - 'wyłączanie PvP na wybranych działkach'
+  tytan:
+    nazwa: '<gradient:#c77dff:#7b2cbf><bold>TYTAN</bold></gradient>'
+    grupa: tytan
+    koszt: 80
+    wymaga: uvip
+    dni: 30
+    ikona: NETHER_STAR
+    perki:
+      - '75 działek (największe: 41x41), 25 domów'
+      - 'x2 doświadczenia'
+      - '/bruk, /piec, gradienty na czacie'
+  drwal:
+    nazwa: '<gold><bold>DRWAL</bold>'
+    grupa: drwal
+    koszt: 40
+    dni: 30
+    ikona: GOLDEN_AXE
+    perki:
+      - 'ścinanie całego drzewa jednym uderzeniem siekiery'
+      - '(kucanie wyłącza)'

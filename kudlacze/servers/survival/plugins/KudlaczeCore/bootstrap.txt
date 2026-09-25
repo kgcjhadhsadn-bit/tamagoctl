@@ -1,0 +1,50 @@
+# =====================================================================
+#  Kudłacze — bootstrap survival (spawn, NPC, hologramy, granice świata, pregeneracja).
+#  Plugin core wykonuje go po zmianie treści oraz po każdej nowej edycji (nowy świat).
+#  Ręcznie: /kudlaczeadmin bootstrap
+# =====================================================================
+# Granice: świat 5000x5000, Nether 1000x1000, End 3000x3000 (ChunkyBorder)
+chunky border add world square 0 0 2500
+chunky border add world_nether square 0 0 500
+chunky border add world_the_end square 0 0 1500
+
+# Pregeneracja (biegnie w tle, wznawia się po restarcie; postęp: /chunky progress)
+chunky world world_nether
+chunky shape square
+chunky center 0 0
+chunky radius 500
+chunky start
+chunky world world
+chunky shape square
+chunky center 0 0
+chunky radius 2500
+chunky start
+
+# --- spawn: gamerule i NPC (pozycje względem środka placu {sx},{sy},{sz} — patrz SpawnLayout) ---
+gamerule respawn_radius 0
+gamerule spawn_phantoms false
+
+npc remove Czarodziej
+npc create Czarodziej --location {sx+0.5} {sy} {sz-5.5} --world {swiat}
+npc type Czarodziej EVOKER
+npc displayname Czarodziej <gradient:#c77dff:#7b2cbf><b>Czarodziej Kudłacz</b></gradient><newline><gray>rangi za Kłaki
+npc turn_to_player Czarodziej true
+npc glowing Czarodziej light_purple
+npc action Czarodziej any_click clear
+npc action Czarodziej any_click add player_command rangi
+npc interaction_cooldown Czarodziej 1s
+
+npc remove Skarbnik
+npc create Skarbnik --location {sx+34.5} {sy} {sz+0.5} --world {swiat}
+npc type Skarbnik VILLAGER
+npc displayname Skarbnik <gold><b>Skarbnik</b></gold><newline><gray>codzienna nagroda (VIP+)
+npc turn_to_player Skarbnik true
+npc action Skarbnik any_click clear
+npc action Skarbnik any_click add player_command skarbnik
+npc interaction_cooldown Skarbnik 1s
+
+dh delete spawn_info
+dh create spawn_info -l:{swiat}:{sx+0.5}:{sy+3.5}:{sz+0.5} <#c77dff>&lKUDŁACZE &7• &fSurvival + Działki
+dh line add spawn_info 1 &7Postaw kamień działki, aby chronić swój dom: &e/ps
+dh line add spawn_info 1 &7Rangi za Kłaki Czarodzieja: &5Czarodziej Kudłacz &7(&e/rangi&7)
+dh line add spawn_info 1 &7Strefa VIP &8→ &7na wschód od placu • Regulamin: &e/regulamin

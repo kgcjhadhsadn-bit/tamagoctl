@@ -1,0 +1,41 @@
+# Kudłacze core — LOBBY (brakujące klucze biorą się z domyślnego config.yml w jarze)
+serwer: ${CFG_SERVER_NAME}
+strefa-czasowa: Europe/Warsaw
+domena: ${CFG_SERVER_DOMAIN}
+discord-zaproszenie: ${CFG_DISCORD_INVITE}
+
+baza:
+  host: ${CFG_DB_HOST}
+  port: ${CFG_DB_PORT}
+  nazwa: ${CFG_DB_NAME}
+  uzytkownik: ${CFG_DB_USER}
+  haslo: ${CFG_DB_PASSWORD}
+  pula: 6
+  watki: 4
+
+waluta:
+  sekret-przedmiotow: ${CFG_KC_ITEM_SECRET}
+
+moduly:
+  waluta: true
+  rangi: true
+  smierc: false
+  perki: false
+  czat: true
+  drwal: false
+  strefa-vip: false
+  lobby: true
+  bootstrap: true
+  siec: true
+  info: true
+
+smierc:
+  tryb: DISABLED
+
+lobby:
+  # przed Przewoźnikiem (NPC stoi na z = 6.5)
+  spawn: {x: 0.5, y: -60.0, z: 0.5, yaw: 0.0, pitch: 0.0}
+  pustka-y: -70
+
+bootstrap:
+  buduj-spawn: false

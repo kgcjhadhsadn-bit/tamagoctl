@@ -1,0 +1,100 @@
+name: KudlaczeCore
+version: '${version}'
+main: pl.kudlacze.core.KudlaczeCore
+api-version: '26.2'
+description: Plugin core sieci Kudłacze — waluta KC, rangi, śmierć=kick, strefa VIP, perki, drwal, Seasons, edycje.
+author: Kudłacze
+website: https://github.com/kgcjhadhsadn-bit/tamagoctl
+softdepend: [LuckPerms, PlaceholderAPI, Vault, WorldGuard, WorldEdit, floodgate, FancyNpcs, DecentHolograms, Chunky, ChunkyBorder, DiscordSRV, Essentials]
+
+commands:
+  kc:
+    description: Saldo i przelewy Kłaków Czarodzieja
+    usage: /kc [nick|przelej|historia|pomoc]
+    aliases: [klaki]
+  wplac:
+    description: Wpłać Kłaki Czarodzieja z ekwipunku na konto
+    usage: /wplac [ilość|wszystko]
+  wyplac:
+    description: Wypłać Kłaki Czarodzieja jako przedmioty
+    usage: /wyplac <ilość>
+  rangi:
+    description: Rangi za Kłaki Czarodzieja (Czarodziej Kudłacz)
+    usage: /rangi [kup <ranga>|lista]
+    aliases: [czarodziej, kudlacz]
+  skarbnik:
+    description: Codzienna nagroda od Skarbnika (VIP+)
+    usage: /skarbnik
+  bruk:
+    description: Zamień bruk z ekwipunku na kamień (TYTAN)
+    usage: /bruk
+  piec:
+    description: Przetop przedmiot w ręce (TYTAN)
+    usage: /piec
+  regulamin:
+    description: Regulamin serwera
+    usage: /regulamin
+  yt:
+    description: Ogłoś swój kanał (ranga YouTuber)
+    usage: /yt <link do kanału>
+  kudlaczeadmin:
+    description: Administracja pluginem core
+    usage: /kudlaczeadmin <bootstrap|moduly>
+    permission: kudlacze.admin
+    aliases: [kadmin]
+
+permissions:
+  kudlacze.gracz:
+    description: Podstawowe funkcje gracza
+    default: true
+  kudlacze.admin:
+    description: Administracja pluginem core
+    default: op
+  kudlacze.personel:
+    description: Powiadomienia dla personelu (podróbki KC, reklama na czacie)
+    default: op
+  kudlacze.kc.podglad:
+    description: Podgląd salda i historii KC innych graczy
+    default: op
+  kudlacze.kc.admin:
+    description: Dodawanie, zabieranie i ustawianie KC
+    default: op
+  kudlacze.death.nokick:
+    description: Brak kicka i blokady po śmierci (UVIP+, personel)
+    default: false
+  kudlacze.strefavip:
+    description: Wstęp do strefy VIP
+    default: false
+  kudlacze.expiarka:
+    description: Aktywuje expiarkę w strefie VIP
+    default: false
+  kudlacze.nagroda.codzienna:
+    description: Codzienna nagroda u Skarbnika
+    default: false
+  kudlacze.bruk:
+    default: false
+  kudlacze.piec:
+    default: false
+  kudlacze.drwal:
+    description: Ścinanie całych drzew (ranga DRWAL)
+    default: false
+  kudlacze.tabliczki.kolory:
+    default: false
+  kudlacze.czat.kolory:
+    default: false
+  kudlacze.czat.gradienty:
+    default: false
+  kudlacze.czat.bez-filtra:
+    description: Pomija filtry czatu (caps, powtórzenia, reklama)
+    default: op
+  kudlacze.slot.rezerwacja:
+    description: Wejście na pełny serwer
+    default: false
+  kudlacze.youtuber.reklama:
+    description: /yt — ogłoszenie kanału (ranga YouTuber)
+    default: false
+  kudlacze.lobby.buduj:
+    description: Budowanie i niszczenie w lobby
+    default: op
+  kudlacze.afk.bypass:
+    default: false

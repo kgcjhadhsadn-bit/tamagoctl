@@ -1,0 +1,131 @@
+# =====================================================================
+#  Kudłacze — teksty pluginu core (MiniMessage: https://docs.advntr.dev/minimessage/format)
+#  Znaczniki w <nawiasach> jak <gracz>, <ilosc> są podstawiane przez plugin.
+#  <prefix> wstawia prefiks poniżej.
+# =====================================================================
+prefix: '<gradient:#c77dff:#7b2cbf><bold>Kudłacze</bold></gradient> <dark_gray>»</dark_gray> '
+
+blad-wewnetrzny: '<prefix><red>Coś poszło nie tak. Spróbuj ponownie za chwilę, a jeśli błąd się powtarza — zgłoś to administracji.'
+tylko-gracz: '<prefix><red>Tej komendy może użyć tylko gracz.'
+brak-uprawnien: '<prefix><red>Nie masz uprawnień do tej komendy.'
+zla-liczba: '<prefix><red>„<wartosc>” nie jest poprawną liczbą.'
+nie-znaleziono-gracza: '<prefix><red>Nie znaleziono gracza <white><gracz></white>.'
+
+kc:
+  przedmiot-nazwa: '<gradient:#e0aaff:#9d4edd:#5a189a><bold>Kłak Czarodzieja</bold></gradient>'
+  przedmiot-opis:
+    - '<gray><italic>Wyrwane z brody samego Czarodzieja</italic>'
+    - ''
+    - '<dark_purple>Waluta Kudłaczy — wymień u Czarodzieja Kudłacza'
+    - '<dark_gray>Wpłać na konto: /wplac'
+  saldo: '<prefix><gray>Masz <light_purple><bold><saldo></bold></light_purple> <slowo> Czarodzieja <dark_gray>(KC)</dark_gray>.'
+  saldo-innego: '<prefix><gray>Gracz <white><gracz></white> ma <light_purple><saldo> KC</light_purple>.'
+  pomoc:
+    - '<gradient:#c77dff:#7b2cbf><bold>Kłaki Czarodzieja (KC)</bold></gradient>'
+    - '<gray>Zdobywasz je w grze: questy, codzienne nagrody, ranking sezonu, Smok Kudłaty, konkursy.'
+    - '<yellow>/kc</yellow> <gray>— twoje saldo'
+    - '<yellow>/kc przelej <nick> <ilość></yellow> <gray>— przelew do gracza'
+    - '<yellow>/kc historia</yellow> <gray>— ostatnie transakcje'
+    - '<yellow>/wyplac <ilość></yellow> <gray>— wypłać jako przedmioty (do handlu)'
+    - '<yellow>/wplac</yellow> <gray>— wpłać przedmioty z ekwipunku'
+    - '<yellow>/rangi</yellow> <gray>— wymień KC na rangę u Czarodzieja Kudłacza'
+  uzycie-przelej: '<prefix><gray>Użycie: <yellow>/kc przelej <nick> <ilość>'
+  przelew-do-siebie: '<prefix><red>Nie możesz przelać KC samemu sobie.'
+  przelew-wyslany: '<prefix><gray>Przelano <light_purple><ilosc> KC</light_purple> graczowi <white><gracz></white>.'
+  przelew-otrzymany: '<prefix><gray>Otrzymałeś <light_purple><ilosc> KC</light_purple> od gracza <white><gracz></white>.'
+  historia-naglowek: '<prefix><gray>Ostatnie transakcje KC gracza <white><gracz></white>:'
+  historia-pusta: '<gray>  (brak transakcji)'
+  historia-wpis: '<dark_gray>  <czas></dark_gray> <zmiana> <gray>→ saldo <white><saldo></white> <dark_gray>(<typ>)'
+  uzycie-admin: '<prefix><gray>Użycie: <yellow>/kc daj|zabierz|ustaw <nick> <ilość>'
+  admin-ok: '<prefix><gray>Saldo gracza <white><gracz></white>: <light_purple><saldo> KC</light_purple>.'
+  za-malo: '<prefix><red>Masz za mało Kłaków Czarodzieja <dark_gray>(saldo: <saldo> KC)</dark_gray>.'
+  podrobka: '<prefix><red>Skonfiskowano <ilosc> podrobionych Kłaków! Administracja została powiadomiona.'
+  duplikat: '<prefix><red>Te Kłaki (<ilosc>) zostały już wcześniej wpłacone — skonfiskowano je. Administracja została powiadomiona.'
+  alert-personel: '<prefix><red><bold>[KC]</bold></red> <gray>Gracz <white><gracz></white> próbował wpłacić <red><ilosc></red> nieprawidłowych Kłaków (podróbka/duplikat).'
+  brak-przedmiotow: '<prefix><gray>Nie masz w ekwipunku żadnych Kłaków Czarodzieja.'
+  wplacono: '<prefix><gray>Wpłacono <light_purple><ilosc> KC</light_purple>. Saldo: <light_purple><saldo> KC</light_purple>.'
+  uzycie-wyplac: '<prefix><gray>Użycie: <yellow>/wyplac <ilość>'
+  wyplata-limit: '<prefix><red>Jednorazowo możesz wypłacić maksymalnie <max> KC.'
+  brak-miejsca: '<prefix><red>Zrób miejsce w ekwipunku (potrzeba <sloty> wolnych slotów).'
+  wyplacono: '<prefix><gray>Wypłacono <light_purple><ilosc> KC</light_purple> jako przedmioty. Saldo: <light_purple><saldo> KC</light_purple>.'
+
+rangi:
+  menu-tytul: '<dark_purple><bold>Czarodziej Kudłacz</bold></dark_purple> <dark_gray>» rangi za KC'
+  menu-bedrock: 'Wymień Kłaki Czarodzieja na rangę. Twoje saldo: <saldo> KC. Każda ranga trwa 30 dni albo do nowej edycji.'
+  lore-koszt: '<gray>Koszt: <light_purple><koszt> KC</light_purple> <dark_gray>• <dni> dni</dark_gray>'
+  lore-wymaga-ok: '<green>✔ Wymaga: <ranga>'
+  lore-wymaga-brak: '<red>✘ Wymaga: <ranga>'
+  lore-masz-wyzsza: '<gray>Masz tę rangę w ramach wyższej.'
+  lore-aktywna: '<green>Aktywna jeszcze: <white><czas>'
+  lore-przedluz: '<yellow>» Kliknij, aby przedłużyć o kolejny okres'
+  lore-kup: '<yellow>» Kliknij, aby wymienić KC na rangę'
+  menu-saldo: '<light_purple><bold>Twoje KC: <saldo>'
+  menu-saldo-opis:
+    - '<gray>Kłaki zdobywasz w grze:'
+    - '<gray>questy, nagrody, ranking, smok, konkursy.'
+  potwierdz-tytul: '<dark_purple>Kupić <ranga><dark_purple>?'
+  potwierdz-bedrock: 'Czy na pewno chcesz wymienić <koszt> KC na tę rangę?'
+  potwierdz-tak: '<green><bold>Tak, wymieniam <koszt> KC'
+  potwierdz-nie: '<red><bold>Anuluj'
+  kupiono: '<prefix><gray>Otrzymujesz rangę <ranga><gray>! Ważna przez <white><czas></white>. Saldo: <light_purple><saldo> KC</light_purple>.'
+  przedluzono: '<prefix><gray>Przedłużono rangę <ranga><gray> — ważna jeszcze <white><czas></white>. Saldo: <light_purple><saldo> KC</light_purple>.'
+  ogloszenie: '<prefix><white><gracz></white> <gray>wymienił Kłaki u Czarodzieja Kudłacza i zdobył rangę <ranga><gray>!'
+  nieznana: '<prefix><red>Nie ma takiej rangi: <ranga>'
+  juz-masz: '<prefix><red>Masz już rangę <ranga><red> (albo wyższą).'
+  wymaga: '<prefix><red>Aby kupić tę rangę, musisz mieć najpierw <ranga><red>.'
+  blad-nadania: '<prefix><red>Nie udało się nadać rangi — Kłaki zostały zwrócone. Zgłoś to administracji.'
+  lista-wpis: '<gray>• <ranga> <gray>— <light_purple><koszt> KC</light_purple> <dark_gray>(/rangi kup <id>)'
+  nazwy:
+    default: '<gray>Gracz'
+    youtuber: '<red>You<white>Tuber'
+    pomocnik: '<yellow>Pomocnik'
+    moderator: '<gold>Moderator'
+    viceadmin: '<red>ViceAdmin'
+    admin: '<dark_red><bold>Admin'
+    technik: '<dark_aqua><bold>Technik'
+
+smierc:
+  kick: '<red><bold>Zginąłeś!</bold></red>\n<gray>Na Kudłaczach śmierć oznacza wyrzucenie z serwera.\n<gray>Wróć, kiedy zechcesz — Twoje rzeczy zostały tam, gdzie zginąłeś.'
+  kick-blokada: '<red><bold>Zginąłeś!</bold></red>\n<gray>Na Kudłaczach śmierć oznacza wyrzucenie z serwera.\n<gray>Możesz wrócić za <white><czas></white>.\n<dark_gray>(Rangi od UVIP nie mają tej blokady)'
+  blokada-trwa: '<red>Niedawno zginąłeś na tym serwerze.\n<gray>Możesz wrócić za <white><czas></white>.'
+
+perki:
+  bruk-ok: '<prefix><gray>Zamieniono <white><ilosc></white> bruku na kamień.'
+  bruk-brak: '<prefix><gray>Nie masz bruku w ekwipunku.'
+  piec-cooldown: '<prefix><red>Piec się jeszcze grzeje — poczekaj <sekundy> s.'
+  piec-pusta-reka: '<prefix><red>Weź do ręki przedmiot do przetopienia.'
+  piec-nie-da-sie: '<prefix><red>Tego przedmiotu nie da się przetopić.'
+  piec-ok: '<prefix><gray>Przetopiono <white><ilosc></white> szt. na <white><przedmiot></white>.'
+
+czat:
+  spam: '<prefix><red>Nie powtarzaj tej samej wiadomości (regulamin: zakaz spamu).'
+  reklama: '<prefix><red>Reklama innych serwerów i stron jest zakazana (regulamin).'
+  reklama-personel: '<prefix><red><bold>[Czat]</bold></red> <white><gracz></white> <gray>próbował wysłać: <white><tresc>'
+
+vip:
+  brak-wstepu: '<prefix><red>Strefa VIP jest dostępna od rangi <green><bold>VIP</bold></green><red> — zdobądź ją u Czarodzieja Kudłacza (/rangi).'
+  skarbnik-tylko-vip: '<prefix><red>Skarbnik rozdaje nagrody tylko graczom z rangą VIP i wyższą.'
+  skarbnik-juz-odebrano: '<prefix><gray>Dzisiejsza nagroda odebrana. Następna za <white><czas></white>.'
+  skarbnik-nagroda: '<prefix><gold>Skarbnik</gold> <gray>wręcza Ci: <nagroda><gray>. Wróć jutro!'
+  expiarka-mob: '<dark_purple>Kudłaty Zombie'
+
+admin:
+  bootstrap: '<prefix><gray>Uruchomiono bootstrap serwera <white><serwer></white> (spawn, NPC, hologramy).'
+  uzycie: '<prefix><gray>Użycie: <yellow>/kudlaczeadmin bootstrap|moduly'
+
+yt:
+  uzycie: '<prefix><gray>Użycie: <yellow>/yt <link do kanału YouTube/Twitch/TikTok>'
+  cooldown: '<prefix><red>Kolejne ogłoszenie możesz wysłać za <czas>.'
+  ogloszenie: '<prefix><red>▶</red> <white><gracz></white> <gray>zaprasza na swój kanał: <link>'
+
+regulamin:
+  - '<gradient:#c77dff:#7b2cbf><bold>Regulamin Kudłaczy</bold></gradient>'
+  - '<white>1.</white> <gray>Poza działkami survival jest brutalny: wolno walczyć, kraść i oszukiwać.'
+  - '<white>2.</white> <red>Griefowanie cudzych działek jest zakazane</red> <gray>(kary do bana).'
+  - '<white>3.</white> <gray>Zakaz cheatów, modów dających przewagę, bugowania i wykorzystywania błędów.'
+  - '<white>4.</white> <gray>Zakaz farm AFK (tzw. afkczarek) — gracz AFK nie zdobywa nagród i jest wyrzucany.'
+  - '<white>5.</white> <gray>Zakaz reklamy innych serwerów, spamu, floodu i pisania CAPSEM.'
+  - '<white>6.</white> <gray>Zakaz handlu przedmiotami, walutą i kontami za prawdziwe pieniądze.'
+  - '<white>7.</white> <gray>Szanuj innych graczy i administrację — bez obrażania i dyskryminacji.'
+  - '<white>8.</white> <gray>Śmierć = wyrzucenie z serwera (na survivalu blokada 5 min, od UVIP bez blokady).'
+  - '<dark_gray>Pełna treść: docs/REGULAMIN.md • nieznajomość regulaminu nie zwalnia z jego przestrzegania.'
