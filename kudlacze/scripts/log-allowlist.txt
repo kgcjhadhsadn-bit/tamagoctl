@@ -41,3 +41,5 @@ HikariPool-1 - keepaliveTime is greater than or equal to maxLifetime
 # Velocity loguje jako ERROR każdą odmowę wejścia na backend (blokada po śmierci, ban, zła wersja
 # klienta) — to oczekiwane działanie zasad serwera, a nie awaria.
 disconnected while connecting to (lobby|survival|seasons):
+# Brak właściwości profilu (skórki) z API Mojang — konta offline w testach albo chwilowa niedostępność API
+Couldn't look up profile properties for

@@ -28,6 +28,11 @@ moduly:
   bootstrap: true
   siec: true
   info: true
+  tytuly: true
+  ranking: true
+  sezony: false
+  smok: false
+  edycje: false
 
 smierc:
   tryb: DISABLED

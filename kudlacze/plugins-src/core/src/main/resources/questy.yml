@@ -1,0 +1,188 @@
+# =====================================================================
+#  Kudłacze — Seasons: questy Kwatermistrza, wyzwania, sklep kryształów
+#  Zmiany wczytuje restart serwera seasons (albo /sezon przeladuj).
+#
+#  Ekonomia (docs/EKONOMIA.md): questy dają aktywnemu graczowi ok. 10 KC tygodniowo —
+#  tyle wynosi tygodniowy limit KC z questów. Punkty rankingowe są przyznawane zawsze.
+# =====================================================================
+
+# Limit KC z questów na tydzień (poniedziałek 00:00 – niedziela 23:59, Europe/Warsaw). 0 = bez limitu.
+limit-kc-tygodniowo: 10
+
+# Punkty rankingowe za czas gry — tylko gdy gracz nie jest AFK
+czas-gry:
+  co-ile-minut: 5
+  punkty: 1
+
+# Questy dostawy: oddaj Kwatermistrzowi przedmioty z listy (dowolna kombinacja) w podanej ilości.
+questy:
+  drewno:
+    nazwa: '<gold>Palisada obozu'
+    przedmioty: [OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, MANGROVE_LOG, CHERRY_LOG, PALE_OAK_LOG]
+    ilosc: 128
+    punkty: 15
+    kc: 1
+    limit-dzienny: 2
+    ikona: OAK_LOG
+  zelazo:
+    nazwa: '<white>Zbrojownia'
+    przedmioty: [IRON_INGOT]
+    ilosc: 32
+    punkty: 25
+    kc: 1
+    limit-dzienny: 2
+    ikona: IRON_INGOT
+  zywnosc:
+    nazwa: '<green>Zapasy na zimę'
+    przedmioty: [BREAD, BAKED_POTATO, COOKED_BEEF, COOKED_PORKCHOP, COOKED_MUTTON, COOKED_CHICKEN, COOKED_COD, COOKED_SALMON]
+    ilosc: 64
+    punkty: 15
+    kc: 1
+    limit-dzienny: 2
+    ikona: BREAD
+  kosci:
+    nazwa: '<gray>Kości i proch'
+    przedmioty: [BONE, GUNPOWDER]
+    ilosc: 64
+    punkty: 20
+    kc: 1
+    limit-dzienny: 2
+    ikona: BONE
+  kamien:
+    nazwa: '<dark_gray>Mury twierdzy'
+    przedmioty: [COBBLESTONE, COBBLED_DEEPSLATE, STONE, DEEPSLATE]
+    ilosc: 256
+    punkty: 10
+    kc: 1
+    limit-dzienny: 1
+    ikona: COBBLESTONE
+  zloto:
+    nazwa: '<yellow>Skarbiec'
+    przedmioty: [GOLD_INGOT]
+    ilosc: 32
+    punkty: 30
+    kc: 1
+    limit-dzienny: 1
+    ikona: GOLD_INGOT
+  diamenty:
+    nazwa: '<aqua>Klejnoty Czarodzieja'
+    przedmioty: [DIAMOND]
+    ilosc: 8
+    punkty: 50
+    kc: 2
+    limit-dzienny: 1
+    ikona: DIAMOND
+  nether:
+    nazwa: '<red>Dary Netheru'
+    przedmioty: [BLAZE_ROD, NETHER_WART, QUARTZ]
+    ilosc: 32
+    punkty: 35
+    kc: 1
+    limit-dzienny: 1
+    ikona: BLAZE_ROD
+
+# Wyzwania sezonu (raz na sezon) — typy: KOPANIE, ZABIJANIE, LOWIENIE, ROZMNAZANIE, ZACZAROWANIE, CZAS_GRY.
+# KOPANIE liczy tylko bloki wykopane bez Jedwabnego dotyku (postawiona ruda nie liczy się drugi raz).
+# ZABIJANIE nie liczy mobów ze spawnerów i jajek spawnu.
+wyzwania:
+  gornik:
+    nazwa: '<aqua>Górnik'
+    opis: 'Wykop 48 rud diamentu'
+    typ: KOPANIE
+    cele: [DIAMOND_ORE, DEEPSLATE_DIAMOND_ORE]
+    cel: 48
+    krysztaly: 5
+    punkty: 60
+    ikona: DIAMOND_PICKAXE
+  kowal:
+    nazwa: '<white>Kowal'
+    opis: 'Wykop 256 rud żelaza'
+    typ: KOPANIE
+    cele: [IRON_ORE, DEEPSLATE_IRON_ORE]
+    cel: 256
+    krysztaly: 3
+    punkty: 40
+    ikona: IRON_PICKAXE
+  lowca:
+    nazwa: '<red>Łowca potworów'
+    opis: 'Pokonaj 500 wrogich mobów'
+    typ: ZABIJANIE
+    cele: [WROGIE]
+    cel: 500
+    krysztaly: 5
+    punkty: 60
+    ikona: IRON_SWORD
+  pogromca:
+    nazwa: '<dark_red>Pogromca Withera'
+    opis: 'Pokonaj Withera'
+    typ: ZABIJANIE
+    cele: [WITHER]
+    cel: 1
+    krysztaly: 8
+    punkty: 80
+    ikona: WITHER_SKELETON_SKULL
+  rybak:
+    nazwa: '<blue>Rybak'
+    opis: 'Złów 100 ryb (lub innych łupów)'
+    typ: LOWIENIE
+    cel: 100
+    krysztaly: 3
+    punkty: 30
+    ikona: FISHING_ROD
+  hodowca:
+    nazwa: '<green>Hodowca'
+    opis: 'Rozmnóż 100 zwierząt'
+    typ: ROZMNAZANIE
+    cel: 100
+    krysztaly: 3
+    punkty: 30
+    ikona: WHEAT
+  zaklinacz:
+    nazwa: '<light_purple>Zaklinacz'
+    opis: 'Zaczaruj 30 przedmiotów w stole do zaklęć'
+    typ: ZACZAROWANIE
+    cel: 30
+    krysztaly: 3
+    punkty: 30
+    ikona: ENCHANTING_TABLE
+  wytrwaly:
+    nazwa: '<gold>Wytrwały'
+    opis: 'Spędź 20 godzin w grze (bez AFK)'
+    typ: CZAS_GRY
+    cel: 1200
+    krysztaly: 5
+    punkty: 50
+    ikona: CLOCK
+
+# Sklep kryształów (Kwatermistrz → Sklep kryształów). Przedmioty przepadają z resetem sezonu.
+sklep-krysztalow:
+  jablko:
+    nazwa: '<gold>Zaklęte złote jabłko'
+    przedmiot: ENCHANTED_GOLDEN_APPLE
+    ilosc: 1
+    cena: 6
+  totem:
+    nazwa: '<yellow>Totem nieśmiertelności'
+    przedmiot: TOTEM_OF_UNDYING
+    ilosc: 1
+    cena: 5
+  shulker:
+    nazwa: '<light_purple>Shulker'
+    przedmiot: SHULKER_BOX
+    ilosc: 1
+    cena: 4
+  perly:
+    nazwa: '<dark_aqua>Perły Endu'
+    przedmiot: ENDER_PEARL
+    ilosc: 16
+    cena: 2
+  butelki:
+    nazwa: '<green>Butelki doświadczenia'
+    przedmiot: EXPERIENCE_BOTTLE
+    ilosc: 64
+    cena: 3
+  marchewki:
+    nazwa: '<gold>Złote marchewki'
+    przedmiot: GOLDEN_CARROT
+    ilosc: 64
+    cena: 2

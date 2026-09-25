@@ -34,3 +34,20 @@ dh create powitanie -l:world:0.5:-57.5:3.5 <#c77dff>&lKUDŁACZE
 dh line add powitanie 1 &fSerwer z kudłami! &6SURVIVAL + DZIAŁKI
 dh line add powitanie 1 &7Kliknij &5Przewoźnika&7, aby wybrać tryb
 dh line add powitanie 1 &7Regulamin: &e/regulamin &7• Menu: &e/menu
+
+# --- Ranking sezonu (placeholdery pluginu core, odświeżane co 30 s ze wspólnej bazy) ---
+dh delete ranking
+dh create ranking -l:world:-6.5:-56.5:5.5 <#ffd700>&lRANKING SEZONU %kudlacze_sezon_numer%
+dh line add ranking 1 &7Koniec sezonu za: &f%kudlacze_sezon_koniec%
+dh line add ranking 1 &6&l1. &f%kudlacze_top_1_nick% &8- &e%kudlacze_top_1_punkty% pkt
+dh line add ranking 1 &7&l2. &f%kudlacze_top_2_nick% &8- &e%kudlacze_top_2_punkty% pkt
+dh line add ranking 1 &c&l3. &f%kudlacze_top_3_nick% &8- &e%kudlacze_top_3_punkty% pkt
+dh line add ranking 1 &74. &f%kudlacze_top_4_nick% &8- &e%kudlacze_top_4_punkty% pkt
+dh line add ranking 1 &75. &f%kudlacze_top_5_nick% &8- &e%kudlacze_top_5_punkty% pkt
+dh line add ranking 1 &76. &f%kudlacze_top_6_nick% &8- &e%kudlacze_top_6_punkty% pkt
+dh line add ranking 1 &77. &f%kudlacze_top_7_nick% &8- &e%kudlacze_top_7_punkty% pkt
+dh line add ranking 1 &78. &f%kudlacze_top_8_nick% &8- &e%kudlacze_top_8_punkty% pkt
+dh line add ranking 1 &79. &f%kudlacze_top_9_nick% &8- &e%kudlacze_top_9_punkty% pkt
+dh line add ranking 1 &710. &f%kudlacze_top_10_nick% &8- &e%kudlacze_top_10_punkty% pkt
+dh line add ranking 1 &7Twoje punkty: &e%kudlacze_sezon_punkty% &8(#%kudlacze_sezon_miejsce%)
+dh line add ranking 1 &4Smok Kudłaty &7za: &c%kudlacze_smok_za%

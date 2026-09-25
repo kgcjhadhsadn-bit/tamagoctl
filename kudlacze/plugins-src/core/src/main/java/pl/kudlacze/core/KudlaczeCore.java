@@ -51,11 +51,8 @@ public class KudlaczeCore extends JavaPlugin implements Listener {
     @Override
     public void onLoad() {
         saveDefaultConfig();
-        for (String res : List.of("messages_pl.yml", "rangi.yml")) {
-            if (getResource(res) != null && !new java.io.File(getDataFolder(), res).exists()) {
-                saveResource(res, false);
-            }
-        }
+        // messages_pl.yml, rangi.yml i questy.yml NIE są kopiowane do folderu pluginu: źródłem jest jar
+        // (aktualizacje tekstów i balansu wchodzą z nową wersją), a plik w folderze to opcjonalne nadpisanie.
         // Czyszczenie światów (nowa edycja / nowy sezon) musi się odbyć przed ich załadowaniem.
         try {
             pl.kudlacze.core.world.WorldReset.runPending(this);
@@ -110,6 +107,8 @@ public class KudlaczeCore extends JavaPlugin implements Listener {
         ctx = new CoreContext(this, config, messages, tasks, clock, new Sql(database), kcItems);
         detectHooks(ctx);
         ctx.menus = new MenuService(ctx.bedrock, tasks);
+        ctx.provide(pl.kudlacze.core.seasons.SeasonService.class, new pl.kudlacze.core.seasons.SeasonService(ctx.sql, ctx.kv));
+        ctx.provide(pl.kudlacze.core.titles.TitleService.class, new pl.kudlacze.core.titles.TitleService(ctx.sql));
         Bukkit.getPluginManager().registerEvents(ctx.menus, this);
         Bukkit.getPluginManager().registerEvents(this, this);
 
@@ -164,6 +163,11 @@ public class KudlaczeCore extends JavaPlugin implements Listener {
         modules.add(new pl.kudlacze.core.bootstrap.BootstrapModule(c));
         modules.add(new pl.kudlacze.core.network.NetworkModule(c));
         modules.add(new pl.kudlacze.core.info.InfoModule(c));
+        modules.add(new pl.kudlacze.core.titles.TitlesModule(c));
+        modules.add(new pl.kudlacze.core.ranking.RankingModule(c));
+        modules.add(new pl.kudlacze.core.seasons.SeasonsModule(c));
+        modules.add(new pl.kudlacze.core.dragon.DragonModule(c));
+        modules.add(new pl.kudlacze.core.edition.EditionModule(c));
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

@@ -8,6 +8,7 @@ import pl.kudlacze.core.currency.KcService;
 import pl.kudlacze.core.db.KeyValueStore;
 import pl.kudlacze.core.db.Sql;
 import pl.kudlacze.core.hooks.Bedrock;
+import pl.kudlacze.core.hooks.Discord;
 import pl.kudlacze.core.hooks.MetaReader;
 import pl.kudlacze.core.hooks.Money;
 import pl.kudlacze.core.hooks.Placeholders;
@@ -37,6 +38,7 @@ public final class CoreContext {
     public final Placeholders placeholders;
     public final KcService kc;
     public final KcItems kcItems;
+    public final Discord discord;
     /** Ustawiany po wykryciu hooków (formularze Bedrock wymagają Floodgate). */
     public MenuService menus;
 
@@ -61,6 +63,7 @@ public final class CoreContext {
         this.placeholders = new Placeholders();
         this.kc = new KcService(new pl.kudlacze.core.currency.KcRepository(sql), tasks, clock, config.server());
         this.kcItems = kcItems;
+        this.discord = new Discord(config, plugin.getLogger());
     }
 
     /** Rejestr usług modułów (np. serwis sezonu używany przez smoka i hologram rankingu). */

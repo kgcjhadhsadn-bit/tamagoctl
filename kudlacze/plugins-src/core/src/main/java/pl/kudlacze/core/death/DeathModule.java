@@ -24,7 +24,8 @@ import java.util.UUID;
  *   <li>{@code KICK_AND_LOCK} — jak wyżej + blokada ponownego wejścia na N minut,</li>
  *   <li>{@code DISABLED} — wyłączone.</li>
  * </ul>
- * Uprawnienie {@code kudlacze.death.nokick} (UVIP+ i personel) omija kick i blokadę.
+ * Uprawnienie {@code kudlacze.death.nokick} (UVIP+ i personel) omija kick i blokadę; nie dotyczy też
+ * światów z listy {@code smierc.swiaty-bez-kicka} (arena Smoka Kudłatego).
  */
 public final class DeathModule implements CoreModule, Listener {
 
@@ -59,7 +60,8 @@ public final class DeathModule implements CoreModule, Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getPlayer();
-        if (mode == Mode.DISABLED || player.hasPermission(BYPASS)) {
+        if (mode == Mode.DISABLED || player.hasPermission(BYPASS)
+                || ctx.config.list("smierc.swiaty-bez-kicka").contains(player.getWorld().getName())) {
             return;
         }
         long until = ctx.clock.millis() + lock.toMillis();

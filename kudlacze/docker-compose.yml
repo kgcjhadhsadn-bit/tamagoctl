@@ -68,11 +68,13 @@ x-paper-env: &paper-env
 
 x-paper-service: &paper-service
   image: itzg/minecraft-server:2026.9.2-java25
-  # wspólny klucz Floodgate (secrets/, poza gitem) trafia na standardowe miejsce przed startem
+  # przed startem: zaplanowany reset świata (nowa edycja / nowy sezon — scripts/container/pre-start.sh)
+  # i wspólny klucz Floodgate (secrets/, poza gitem) na standardowym miejscu
   entrypoint:
     - /bin/sh
     - -c
     - >-
+      /bin/sh /kudlacze-scripts/pre-start.sh &&
       install -d -o 1000 -g 1000 /data/plugins/floodgate &&
       install -o 1000 -g 1000 -m 644 /secrets/floodgate-key.pem /data/plugins/floodgate/key.pem &&
       exec /image/scripts/start
@@ -180,6 +182,7 @@ services:
       - ./build/plugins/lobby:/plugins:ro
       - ./build/jars/paper.jar:/jars/paper.jar:ro
       - ./secrets:/secrets:ro
+      - ./scripts/container:/kudlacze-scripts:ro
     mem_limit: 2g
 
   survival:
@@ -197,6 +200,7 @@ services:
       - ./build/plugins/survival:/plugins:ro
       - ./build/jars/paper.jar:/jars/paper.jar:ro
       - ./secrets:/secrets:ro
+      - ./scripts/container:/kudlacze-scripts:ro
     mem_limit: 6g
 
   seasons:
@@ -214,6 +218,7 @@ services:
       - ./build/plugins/seasons:/plugins:ro
       - ./build/jars/paper.jar:/jars/paper.jar:ro
       - ./secrets:/secrets:ro
+      - ./scripts/container:/kudlacze-scripts:ro
     mem_limit: 4g
 
 networks:

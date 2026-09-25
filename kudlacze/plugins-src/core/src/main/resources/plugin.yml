@@ -37,6 +37,27 @@ commands:
   yt:
     description: Ogłoś swój kanał (ranga YouTuber)
     usage: /yt <link do kanału>
+  questy:
+    description: Questy sezonu u Kwatermistrza, wyzwania i sklep kryształów
+    usage: /questy
+    aliases: [kwatermistrz]
+  sezon:
+    description: Informacje o sezonie (admin — reset, punkty)
+    usage: /sezon [reset|punkty|przeladuj]
+  ranking:
+    description: Ranking sezonu
+    usage: /ranking [archiwum <sezon>]
+    aliases: [top]
+  smok:
+    description: Smok Kudłaty — termin walki i wejście na arenę
+    usage: /smok [start|stop]
+  edycja:
+    description: Edycja survivalu (admin — nowa edycja, otwarcie Endu)
+    usage: /edycja [nowa|potwierdz <kod>|end otworz|end zamknij]
+  tytul:
+    description: Wybór tytułu kosmetycznego
+    usage: /tytul [ustaw <tytuł>|zdejmij]
+    aliases: [tytuly]
   kudlaczeadmin:
     description: Administracja pluginem core
     usage: /kudlaczeadmin <bootstrap|moduly>
@@ -98,3 +119,18 @@ permissions:
     default: op
   kudlacze.afk.bypass:
     default: false
+  kudlacze.sezon.admin:
+    description: /sezon reset|punkty|przeladuj
+    default: op
+  kudlacze.smok.admin:
+    description: /smok start|stop, budowanie na arenie smoka
+    default: op
+  kudlacze.edycja.admin:
+    description: /edycja nowa|potwierdz|end
+    default: op
+  kudlacze.edycja.end.omin:
+    description: Wejście do zamkniętego Endu (personel)
+    default: op
+  kudlacze.tytul.admin:
+    description: /tytul nadaj|odbierz
+    default: op

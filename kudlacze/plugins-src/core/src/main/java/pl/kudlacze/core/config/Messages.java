@@ -50,6 +50,12 @@ public final class Messages {
         return value;
     }
 
+    /** Tekst albo wartość domyślna, bez ostrzeżenia w logu (klucze opcjonalne, np. nazwy tytułów). */
+    public String rawOr(String key, String def) {
+        String value = config.getString(key);
+        return value == null ? def : value;
+    }
+
     public List<String> rawList(String key) {
         List<String> list = config.getStringList(key);
         return list.isEmpty() ? List.of(raw(key)) : list;

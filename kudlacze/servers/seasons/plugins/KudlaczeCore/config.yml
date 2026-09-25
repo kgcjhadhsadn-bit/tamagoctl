@@ -28,11 +28,22 @@ moduly:
   bootstrap: true
   siec: true
   info: true
+  tytuly: true
+  ranking: true
+  sezony: true
+  smok: true
+  edycje: false
 
 # Seasons: sam kick po śmierci (bez blokady)
 smierc:
   tryb: KICK
+  # arena Smoka Kudłatego: śmierć bez kicka (ekwipunek zostaje — keep_inventory w świecie areny)
+  swiaty-bez-kicka: [seasons_boss]
 
 bootstrap:
   buduj-spawn: true
   ochrona-spawnu-promien: 100
+
+# Reset sezonu: czyszczenie logów bloków CoreProtect starego świata (tabele co_seasons_*)
+reset:
+  coreprotect-prefiks: co_seasons_

@@ -31,6 +31,11 @@ moduly:
   bootstrap: true
   siec: true
   info: true
+  tytuly: true
+  ranking: true
+  sezony: false
+  smok: false
+  edycje: false
 
 waluta:
   # sekret HMAC przedmiotów KC — ten sam na wszystkich serwerach (KC_ITEM_SECRET w .env)
@@ -40,6 +45,8 @@ smierc:
   # KICK | KICK_AND_LOCK | DISABLED
   tryb: KICK
   blokada-minut: 5
+  # światy bez kicka po śmierci (arena Smoka Kudłatego)
+  swiaty-bez-kicka: []
 
 perki:
   piec-cooldown-sekund: 10
@@ -87,3 +94,65 @@ siec:
 
 yt:
   cooldown-minut: 30
+
+# Kanały Discorda (ID z .env) dla ogłoszeń przez DiscordSRV (discordsrv bcast). Zera = wyłączone.
+discord:
+  kanaly:
+    smok: ${CFG_DISCORD_CHANNEL_SMOK}
+    ranking: ${CFG_DISCORD_CHANNEL_RANKING}
+    czat-survival: ${CFG_DISCORD_CHANNEL_CZAT_SURVIVAL}
+    czat-seasons: ${CFG_DISCORD_CHANNEL_CZAT_SEASONS}
+    logi-kar: ${CFG_DISCORD_CHANNEL_LOGI_KAR}
+
+# Ranking sezonu (placeholdery %kudlacze_top_<n>_nick%, hologram w lobby, /ranking)
+ranking:
+  rozmiar: 10
+  odswiezanie-sekund: 30
+
+# Seasons: reset 1. dnia miesiąca o 12:00 (strefa-czasowa), nagrody top 3: KC + tytuł
+sezon:
+  reset:
+    dzien: 1
+    godzina: '12:00'
+  nagrody-kc: [50, 30, 20]
+  tytuly: [mistrz-sezonu, wicemistrz-sezonu, brazowy-sezonu]
+  archiwum-miejsc: 10
+  ostrzezenia-minut: [1440, 60, 10, 1]
+  afk-po-minutach: 5
+  archiwizuj-swiat: false
+  dodatkowe-swiaty: []
+
+# Smok Kudłaty: co tydzień, arena w osobnym świecie THE_END
+smok:
+  swiat: seasons_boss
+  dzien: SUNDAY
+  godzina: '20:00'
+  ogloszenie-minut-przed: 30
+  arena-otwarta-minut-przed: 15
+  czekaj-na-graczy-minut: 10
+  limit-minut: 30
+  zdrowie: 400
+  min-obrazen: 10
+  punkty: [100, 80, 60, 40, 20]
+  kc: [10, 8, 6, 4, 2]
+  tytul: smokobojca
+  tytul-miejsc: 5
+  pvp: false
+  granica: 400
+  arena: {x: 0.5, z: 60.5}
+
+# Edycje survivalu (co ok. 3 miesiące, /edycja nowa)
+edycja:
+  dlugosc-dni: 90
+  wygas-rangi: true
+  archiwizuj-swiat: true
+  konkurs-dni: 14
+  dodatkowe-swiaty: []
+  end:
+    auto-otwarcie-dni: 7
+    godzina: '20:00'
+
+# Czyszczenie logów bloków CoreProtect starego świata przy resecie (prefiks tabel serwera, puste = nie)
+reset:
+  coreprotect-prefiks: ''
+
