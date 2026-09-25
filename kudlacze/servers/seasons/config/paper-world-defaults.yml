@@ -1,0 +1,12 @@
+# Kudłacze — domyślne ustawienia światów Paper 26.2 (paper-world-defaults.yml).
+# Tylko zmienione wartości; klucze z io.papermc.paper.configuration.WorldConfiguration.
+_version: 31
+anticheat:
+  anti-xray:
+    # 2 = OBFUSCATE — rudy są maskowane losowymi blokami (skuteczne na x-ray i seed-crackery rud)
+    enabled: true
+    engine-mode: 2
+    max-block-height: 64
+    update-radius: 2
+    lava-obscures: false
+    use-permission: false

@@ -1,0 +1,286 @@
+# =====================================================================
+#  Kudłacze — plugins.lock.yml
+#  Przypięte wersje serwera, proxy i wszystkich pluginów z sumami SHA256.
+#
+#  Pobieranie:   ./scripts/download-plugins.sh   (weryfikuje każdą sumę; niezgodność = błąd)
+#  Aktualizacja: ./scripts/update-lock.sh         (podgląd nowych wersji z API)
+#                ./scripts/update-lock.sh --apply (zapis nowych wersji/URL/SHA256)
+#
+#  Pola wpisu:
+#    source   papermc | modrinth | hangar | github | geysermc | url
+#    project  identyfikator projektu w danym źródle (slug / owner/repo)
+#    platform loader/platforma (paper, velocity, spigot…), asset = regex nazwy pliku
+#    targets  gdzie trafia jar: server-jar, proxy-jar, proxy, common (wszystkie backendy),
+#             lobby, survival, seasons
+#  Pola version/url/sha256 wypełnia update-lock — nie edytuj ich ręcznie.
+# =====================================================================
+
+schema: "1"
+minecraft: "26.2"
+entries:
+  - name: paper
+    source: papermc
+    project: paper
+    channel: STABLE
+    version: "26.2-129"
+    file: paper.jar
+    targets: [server-jar]
+    url: "https://fill-data.papermc.io/v1/objects/b1d8f6bfa1b6101fa8e947b53041cb3bdf5540e7b83b6547ca19ba7edefeb083/paper-26.2-129.jar"
+    sha256: b1d8f6bfa1b6101fa8e947b53041cb3bdf5540e7b83b6547ca19ba7edefeb083
+
+  - name: velocity
+    source: papermc
+    project: velocity
+    channel: STABLE
+    version: "4.2.0-30"
+    file: velocity.jar
+    targets: [proxy-jar]
+    url: "https://fill-data.papermc.io/v1/objects/35a5596a5468a035d8a32c8de5ebb0dc6b8d8f0cc3ff5169d514aca762af8aa8/velocity-4.2.0-30.jar"
+    sha256: 35a5596a5468a035d8a32c8de5ebb0dc6b8d8f0cc3ff5169d514aca762af8aa8
+
+  - name: luckperms-velocity
+    source: modrinth
+    project: luckperms
+    platform: velocity
+    version: v5.5.71-velocity
+    file: LuckPerms-Velocity.jar
+    targets: [proxy]
+    url: "https://cdn.modrinth.com/data/Vebnzrzj/versions/tamnmXad/LuckPerms-Velocity-5.5.71.jar"
+    sha256: a3ac92ef4e29fd87a4d706dc92445fd946f1caf1d33526ca18422a62554fa18a
+
+  - name: geyser-velocity
+    source: geysermc
+    project: geyser
+    platform: velocity
+    version: 2.11.3-b1247
+    file: Geyser-Velocity.jar
+    targets: [proxy]
+    url: "https://download.geysermc.org/v2/projects/geyser/versions/2.11.3/builds/1247/downloads/velocity"
+    sha256: 3ef64b8afe8778873c06e55e89a73f8109214781ab1f964636031a52d2eee619
+
+  - name: floodgate-velocity
+    source: geysermc
+    project: floodgate
+    platform: velocity
+    version: 2.2.5-b141
+    file: Floodgate-Velocity.jar
+    targets: [proxy]
+    url: "https://download.geysermc.org/v2/projects/floodgate/versions/2.2.5/builds/141/downloads/velocity"
+    sha256: 649835022de37ff09255fc626d4bfe7bc2a3b926d07b0dfaf1f51e12bf37001d
+
+  - name: viaversion
+    source: modrinth
+    project: viaversion
+    platform: velocity
+    version: "5.12.0"
+    file: ViaVersion.jar
+    targets: [proxy]
+    url: "https://cdn.modrinth.com/data/P1OZGk5p/versions/FaishMnD/ViaVersion-5.12.0.jar"
+    sha256: c4d512fa9760fa41d17abaedde12aa1f4c9bde920d0a992fe0fc016962f126be
+
+  - name: viabackwards
+    source: modrinth
+    project: viabackwards
+    platform: velocity
+    version: "5.12.0"
+    file: ViaBackwards.jar
+    targets: [proxy]
+    url: "https://cdn.modrinth.com/data/NpvuJQoq/versions/SxGhdsPK/ViaBackwards-5.12.0.jar"
+    sha256: f902f7da7eb99e8bfaf461f80283c4e2750b7d9727e6b508ea4bb9163f55b1db
+
+  - name: luckperms-paper
+    source: modrinth
+    project: luckperms
+    platform: paper
+    version: v5.5.71-bukkit
+    file: LuckPerms-Bukkit.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/Vebnzrzj/versions/b0mk8uS6/LuckPerms-Bukkit-5.5.71.jar"
+    sha256: 49cecb66fa1fd22a133039a490e9c1e5095a238e7cd66eb9d2a16fe6c897550d
+
+  - name: floodgate-paper
+    source: geysermc
+    project: floodgate
+    platform: spigot
+    version: 2.2.5-b141
+    file: Floodgate-Spigot.jar
+    targets: [common]
+    url: "https://download.geysermc.org/v2/projects/floodgate/versions/2.2.5/builds/141/downloads/spigot"
+    sha256: 21570aff9ce17d6983928e8552777760e1ede5050026b04c686b0ae112e6fd7e
+
+  - name: essentialsx
+    source: modrinth
+    project: essentialsx
+    platform: paper
+    mc: "26.1.2"
+    version: "2.22.0"
+    file: EssentialsX.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/hXiIvTyT/versions/nY6VN1XH/EssentialsX-2.22.0.jar"
+    sha256: bda4685105977fca2e209820a9f0ad24275bd103390a03236f38e59bfdac58e6
+    note: "EssentialsX 2.22 wspiera 26.2 (changelog), ale na Modrinth otagowano tylko 26.1.2"
+
+  - name: essentialsx-spawn
+    source: modrinth
+    project: essentialsx-spawn
+    platform: paper
+    mc: "26.1.2"
+    version: "2.22.0"
+    file: EssentialsXSpawn.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/sYpvDxGJ/versions/lc5JHiNJ/EssentialsXSpawn-2.22.0.jar"
+    sha256: dd5377c4c921b9b67814209f4f6646ffbb959729003e721ec5e63c47c7c010b8
+
+  - name: vaultunlocked
+    source: modrinth
+    project: vaultunlocked
+    platform: paper
+    version: "2.20.3"
+    file: VaultUnlocked.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/ayRaM8J7/versions/qZgRzoYs/VaultUnlocked-2.20.3.jar"
+    sha256: fbc6651aca11e13376c115df66eeffa79592e79517be398299aa6beb49c22695
+
+  - name: placeholderapi
+    source: hangar
+    project: HelpChat/PlaceholderAPI
+    platform: PAPER
+    version: "2.12.3"
+    file: PlaceholderAPI.jar
+    targets: [common]
+    url: "https://hangarcdn.papermc.io/plugins/HelpChat/PlaceholderAPI/versions/2.12.3/PAPER/PlaceholderAPI-2.12.3.jar"
+    sha256: fde03259f5af6938f3c33eeb4d814000a1adabf1d2304ce14970be81f609a437
+
+  - name: worldedit
+    source: modrinth
+    project: worldedit
+    platform: paper
+    version: "7.4.5"
+    file: WorldEdit.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/1u6JkXh5/versions/F5ea2ov3/worldedit-bukkit-7.4.5.jar"
+    sha256: e5696a6d064b9969437a8888be91b0941148a28e0c3736de1554a00254a5d142
+
+  - name: worldguard
+    source: modrinth
+    project: worldguard
+    platform: paper
+    version: "7.0.19"
+    file: WorldGuard.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/DKY9btbd/versions/TtfwTyi6/worldguard-bukkit-7.0.19.jar"
+    sha256: 396df065f1cf38bab9878a0f53a776d5a085ebbf3c41813938b73f95d4eaca03
+
+  - name: fancynpcs
+    source: modrinth
+    project: fancynpcs
+    platform: paper
+    version: "2.12.1"
+    file: FancyNpcs.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/EeyAn23L/versions/LigxTtVw/FancyNpcs-2.12.1.jar"
+    sha256: a3464906d6c797781a29831706ebd5cdfa6d076fa094da2f0e7574b436fb9532
+
+  - name: decentholograms
+    source: modrinth
+    project: decentholograms
+    platform: paper
+    version: "2.10.1"
+    file: DecentHolograms.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/w02MKsTg/versions/Fva1FgWm/DecentHolograms-2.10.1.jar"
+    sha256: e247b7362c277dad0596cb48b5d1570b1002fba014a5afd8458d978963a253b4
+
+  - name: tab
+    source: modrinth
+    project: tab-was-taken
+    platform: paper
+    version: "6.2.0"
+    file: TAB.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/gG7VFbG0/versions/OzomWbbH/TAB%20v6.2.0.jar"
+    sha256: f94331947134242efa478b9b9bf04b29e37861721dee58c32b7ea57779aa735e
+
+  - name: deluxemenus
+    source: modrinth
+    project: deluxemenus
+    platform: paper
+    version: 1.14.1-Release
+    file: DeluxeMenus.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/kKZkPgJ7/versions/PNKQ6RMs/DeluxeMenus-1.14.1-Release.jar"
+    sha256: ec10a1317152aa57d76eec8cb3e1e7dc7f52e45c7a5d742c0baa1e394496ec20
+
+  - name: grim
+    source: modrinth
+    project: grimac
+    platform: paper
+    channel: alpha
+    version: 2.3.74-8eb5f28
+    file: GrimAC.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/LJNGWSvH/versions/Gd6BG1HA/grimac-bukkit-2.3.74-8eb5f28.jar"
+    sha256: 91c06e7ae7da53636bc5e500d5af3d36a6180247e155fa5b4340da5a72f9eeb7
+    note: Grim publikuje buildy dla 26.x tylko jako alpha (ostatnie wydanie stabilne 2.3.73 = 1.21.11)
+
+  - name: libertybans
+    source: modrinth
+    project: libertybans
+    platform: paper
+    version: "1.1.4"
+    file: LibertyBans.jar
+    targets: [common]
+    url: "https://cdn.modrinth.com/data/PgXAUxLZ/versions/7WLjonzv/LibertyBans_Release-1.1.4.jar"
+    sha256: 57303df011ff49747856af4ed818546f19b5dd84b8c627a6666431d0df962634
+
+  - name: protectionstones
+    source: modrinth
+    project: protectionstones
+    platform: paper
+    mc: "1.21.10"
+    version: "2.10.6"
+    file: ProtectionStones.jar
+    targets: [survival, seasons]
+    url: "https://cdn.modrinth.com/data/r1kETbys/versions/y1r6kma7/ProtectionStones-2.10.6.jar"
+    sha256: dbe4dabeb427fb018a6b900788480321b6d762e4fb91a4491178760ebdef1ade
+    note: Autor deklaruje 1.21.10+; działanie na 26.2 zweryfikowane uruchomieniem (docs/WERSJE.md)
+
+  - name: coreprotect
+    source: modrinth
+    project: coreprotect
+    platform: paper
+    version: "24.1"
+    file: CoreProtect.jar
+    targets: [survival, seasons]
+    url: "https://cdn.modrinth.com/data/Lu3KuzdV/versions/3sehX6Sg/CoreProtect-CE-24.1.jar"
+    sha256: a2acef7c06ef201355cef07d591a6055dfed358ad768faaaaaf4e276865ecc97
+
+  - name: chunky
+    source: modrinth
+    project: chunky
+    platform: paper
+    version: "1.5.3"
+    file: Chunky.jar
+    targets: [survival, seasons]
+    url: "https://cdn.modrinth.com/data/fALzjamp/versions/MdY6JATr/Chunky-Bukkit-1.5.3.jar"
+    sha256: 530d2c7430a96a39957391b7088be144daa3108f7665896d1c23aa8dd4af32f3
+
+  - name: chunkyborder
+    source: modrinth
+    project: chunkyborder
+    platform: paper
+    version: "1.2.23"
+    file: ChunkyBorder.jar
+    targets: [survival, seasons]
+    url: "https://cdn.modrinth.com/data/s86X568j/versions/asaBBItO/ChunkyBorder-Bukkit-1.2.23.jar"
+    sha256: 7fa76e7ad85e4142be7203c30bc843896518985398ba8961fd573faa2964432f
+
+  - name: discordsrv
+    source: modrinth
+    project: discordsrv
+    platform: paper
+    version: "1.30.5"
+    file: DiscordSRV.jar
+    targets: [survival, seasons]
+    url: "https://cdn.modrinth.com/data/UmLGoGij/versions/ATlquwiT/DiscordSRV-Build-1.30.5.jar"
+    sha256: ef2fa1f2eb146c7c77412b7190a7dd33f1fc91282683fe45407739554c8aefef

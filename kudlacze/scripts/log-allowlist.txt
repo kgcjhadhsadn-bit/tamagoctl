@@ -1,0 +1,14 @@
+# Znane, nieszkodliwe linie w logach (regex, jedna na linię) — pomijane przez check-logs.sh.
+# Każdy wpis ma uzasadnienie. Nie dopisuj tu błędów, które da się naprawić.
+
+# Java 25 ostrzega o sun.misc.Unsafe używanym przez biblioteki (joml w Paper, Guice w Velocity).
+# To informacja dla autorów bibliotek, bez wpływu na działanie.
+WARNING: (A terminally deprecated method in sun\.misc\.Unsafe|sun\.misc\.Unsafe::|Please consider reporting this to the maintainers)
+
+# Backendy celowo mają online-mode=false: autoryzuje Velocity (online-mode=true),
+# a Paper przyjmuje tylko połączenia z sekretem modern forwarding.
+SERVER IS RUNNING IN OFFLINE/INSECURE MODE
+The server will make no attempt to authenticate usernames
+Whilst this makes it possible to use Velocity
+docs\.papermc\.io/velocity/security
+To change this, set "online-mode" to "true"

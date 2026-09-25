@@ -1,0 +1,194 @@
+# =====================================================================
+#  Kudłacze — sieć serwerów Minecraft (Velocity + lobby/survival/seasons)
+#
+#  Start:  ./scripts/init-env.sh        (tylko raz — tworzy .env)
+#          ./scripts/download-plugins.sh (Paper, Velocity, pluginy + SHA256)
+#          ./scripts/build-core.sh       (plugin core)
+#          docker compose up -d
+#
+#  Limity pamięci poniżej są dla VPS 16 GB. Lokalnie docker compose
+#  automatycznie wczytuje docker-compose.override.yml z mniejszymi limitami.
+# =====================================================================
+name: kudlacze
+
+x-paper-env: &paper-env
+  EULA: "TRUE"
+  TYPE: PAPER
+  VERSION: "26.2"
+  # Jar Paper z plugins.lock.yml (sprawdzona suma SHA256), bez pobierania przy starcie
+  PAPER_CUSTOM_JAR: /jars/paper.jar
+  SKIP_DOWNLOAD_DEFAULTS: "true"
+  # server.properties, bukkit.yml, spigot.yml, config/*.yml i configi pluginów
+  # pochodzą z repo (servers/_common + servers/<nazwa>) i są synchronizowane do /data.
+  SKIP_SERVER_PROPERTIES: "true"
+  COPY_CONFIG_SRC: /config-common,/config
+  COPY_CONFIG_DEST: /data
+  COPY_PLUGINS_SRC: /plugins-common,/plugins
+  REMOVE_OLD_MODS: "TRUE"
+  REMOVE_OLD_MODS_INCLUDE: "*.jar"
+  REMOVE_OLD_MODS_DEPTH: "1"
+  USE_AIKAR_FLAGS: "true"
+  ENABLE_ROLLING_LOGS: "true"
+  STOP_DURATION: "80"
+  TZ: ${TZ:-Europe/Warsaw}
+  # Velocity modern forwarding — Paper czyta sekret ze zmiennej PAPER_VELOCITY_SECRET
+  PAPER_VELOCITY_SECRET: ${VELOCITY_SECRET:?Uzupełnij VELOCITY_SECRET w .env}
+  RCON_PASSWORD: ${RCON_PASSWORD:?Uzupełnij RCON_PASSWORD w .env}
+  # Zmienne CFG_* są podstawiane w plikach configów (${CFG_...}) podczas synchronizacji
+  CFG_RCON_PASSWORD: ${RCON_PASSWORD}
+  CFG_DB_HOST: mariadb
+  CFG_DB_PORT: "3306"
+  CFG_DB_NAME: ${DB_NAME:-kudlacze}
+  CFG_DB_USER: ${DB_USER:-kudlacze}
+  CFG_DB_PASSWORD: ${DB_PASSWORD:?Uzupełnij DB_PASSWORD w .env}
+  CFG_SERVER_DOMAIN: ${SERVER_DOMAIN:-kudlacze.pl}
+  CFG_KC_ITEM_SECRET: ${KC_ITEM_SECRET:?Uzupełnij KC_ITEM_SECRET w .env}
+  CFG_RESOURCE_PACK_URL: ${RESOURCE_PACK_URL:-}
+  CFG_RESOURCE_PACK_SHA1: ${RESOURCE_PACK_SHA1:-}
+  CFG_DISCORD_BOT_TOKEN: ${DISCORD_BOT_TOKEN:-}
+  CFG_DISCORD_INVITE: ${DISCORD_INVITE:-}
+  CFG_DISCORD_CHANNEL_CZAT_SURVIVAL: ${DISCORD_CHANNEL_CZAT_SURVIVAL:-000000000000000000}
+  CFG_DISCORD_CHANNEL_CZAT_SEASONS: ${DISCORD_CHANNEL_CZAT_SEASONS:-000000000000000000}
+  CFG_DISCORD_CHANNEL_LOGI_KAR: ${DISCORD_CHANNEL_LOGI_KAR:-000000000000000000}
+  CFG_DISCORD_CHANNEL_RANKING: ${DISCORD_CHANNEL_RANKING:-000000000000000000}
+  CFG_DISCORD_CHANNEL_SMOK: ${DISCORD_CHANNEL_SMOK:-000000000000000000}
+  CFG_DISCORD_CHANNEL_KONSOLA: ${DISCORD_CHANNEL_KONSOLA:-000000000000000000}
+  CFG_DISCORD_ROLE_VIP: ${DISCORD_ROLE_VIP:-0}
+  CFG_DISCORD_ROLE_SVIP: ${DISCORD_ROLE_SVIP:-0}
+  CFG_DISCORD_ROLE_MVIP: ${DISCORD_ROLE_MVIP:-0}
+  CFG_DISCORD_ROLE_UVIP: ${DISCORD_ROLE_UVIP:-0}
+  CFG_DISCORD_ROLE_TYTAN: ${DISCORD_ROLE_TYTAN:-0}
+  CFG_DISCORD_ROLE_DRWAL: ${DISCORD_ROLE_DRWAL:-0}
+  CFG_DISCORD_ROLE_YOUTUBER: ${DISCORD_ROLE_YOUTUBER:-0}
+  CFG_DISCORD_ROLE_POMOCNIK: ${DISCORD_ROLE_POMOCNIK:-0}
+  CFG_DISCORD_ROLE_MODERATOR: ${DISCORD_ROLE_MODERATOR:-0}
+  CFG_DISCORD_ROLE_VICEADMIN: ${DISCORD_ROLE_VICEADMIN:-0}
+  CFG_DISCORD_ROLE_ADMIN: ${DISCORD_ROLE_ADMIN:-0}
+  CFG_DISCORD_ROLE_TECHNIK: ${DISCORD_ROLE_TECHNIK:-0}
+
+x-paper-service: &paper-service
+  image: itzg/minecraft-server:2026.9.2-java25
+  restart: unless-stopped
+  tty: true
+  stdin_open: true
+  stop_grace_period: 90s
+  depends_on:
+    mariadb:
+      condition: service_healthy
+  networks: [kudlacze]
+
+services:
+  mariadb:
+    image: mariadb:12.3.3
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-Europe/Warsaw}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?Uzupełnij MARIADB_ROOT_PASSWORD w .env}
+      MARIADB_DATABASE: ${DB_NAME:-kudlacze}
+      MARIADB_USER: ${DB_USER:-kudlacze}
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Uzupełnij DB_PASSWORD w .env}
+      MARIADB_AUTO_UPGRADE: "1"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --innodb-buffer-pool-size=768M
+      - --max-connections=300
+      - --default-time-zone=+00:00
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+    mem_limit: 1536m
+    networks: [kudlacze]
+
+  velocity:
+    image: itzg/mc-proxy:2026.9.2-java25
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    environment:
+      TYPE: CUSTOM
+      CUSTOM_FAMILY: velocity
+      BUNGEE_JAR_FILE: /jars/velocity.jar
+      SKIP_DOWNLOAD_DEFAULTS: "true"
+      # healthcheck obrazu dla TYPE=CUSTOM domyślnie pinguje 25577 (BungeeCord)
+      SERVER_PORT: "25565"
+      MEMORY: 768m
+      TZ: ${TZ:-Europe/Warsaw}
+      VELOCITY_FORWARDING_SECRET: ${VELOCITY_SECRET:?Uzupełnij VELOCITY_SECRET w .env}
+      REPLACE_ENV_DURING_SYNC: "true"
+      CFG_DB_HOST: mariadb
+      CFG_DB_PORT: "3306"
+      CFG_DB_NAME: ${DB_NAME:-kudlacze}
+      CFG_DB_USER: ${DB_USER:-kudlacze}
+      CFG_DB_PASSWORD: ${DB_PASSWORD:?Uzupełnij DB_PASSWORD w .env}
+      CFG_SERVER_DOMAIN: ${SERVER_DOMAIN:-kudlacze.pl}
+      JVM_XX_OPTS: >-
+        -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions
+        -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15
+    ports:
+      - "25565:25565/tcp"
+      - "19132:19132/udp"
+    volumes:
+      - ./data/velocity:/server
+      - ./proxy/velocity:/config:ro
+      - ./build/plugins/proxy:/plugins:ro
+      - ./build/jars/velocity.jar:/jars/velocity.jar:ro
+    mem_limit: 1g
+    networks: [kudlacze]
+
+  lobby:
+    <<: *paper-service
+    environment:
+      <<: *paper-env
+      MEMORY: 1536M
+      CFG_SERVER_NAME: lobby
+    volumes:
+      - ./data/lobby:/data
+      - ./servers/_common:/config-common:ro
+      - ./servers/lobby:/config:ro
+      - ./build/plugins/common:/plugins-common:ro
+      - ./build/plugins/lobby:/plugins:ro
+      - ./build/jars/paper.jar:/jars/paper.jar:ro
+    mem_limit: 2g
+
+  survival:
+    <<: *paper-service
+    environment:
+      <<: *paper-env
+      MEMORY: 5G
+      CFG_SERVER_NAME: survival
+    volumes:
+      - ./data/survival:/data
+      - ./servers/_common:/config-common:ro
+      - ./servers/survival:/config:ro
+      - ./build/plugins/common:/plugins-common:ro
+      - ./build/plugins/survival:/plugins:ro
+      - ./build/jars/paper.jar:/jars/paper.jar:ro
+    mem_limit: 6g
+
+  seasons:
+    <<: *paper-service
+    environment:
+      <<: *paper-env
+      MEMORY: 3276M
+      CFG_SERVER_NAME: seasons
+    volumes:
+      - ./data/seasons:/data
+      - ./servers/_common:/config-common:ro
+      - ./servers/seasons:/config:ro
+      - ./build/plugins/common:/plugins-common:ro
+      - ./build/plugins/seasons:/plugins:ro
+      - ./build/jars/paper.jar:/jars/paper.jar:ro
+    mem_limit: 4g
+
+networks:
+  kudlacze:
+    name: kudlacze

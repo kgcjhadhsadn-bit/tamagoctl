@@ -1,0 +1,24 @@
+# Kudłacze — wspólna konfiguracja Paper 26.2 (paper-global.yml).
+# Zawiera tylko zmienione wartości; Paper uzupełnia resztę domyślnymi przy starcie.
+# Klucze sprawdzone w io.papermc.paper.configuration.GlobalConfiguration (ver/26.2).
+_version: 31
+proxies:
+  velocity:
+    enabled: true
+    online-mode: true
+    # Sekret pochodzi ze zmiennej środowiskowej PAPER_VELOCITY_SECRET (docker-compose.yml)
+    secret: ''
+messages:
+  no-permission: '<red>Nie masz uprawnień do tej komendy.</red>'
+  kick:
+    authentication-servers-down: '<red>Serwery logowania Mojang nie odpowiadają. Spróbuj za chwilę.</red>'
+    connection-throttle: '<red>Zbyt szybkie ponowne łączenie. Odczekaj chwilę.</red>'
+    flying-player: '<red>Latanie nie jest tu dozwolone.</red>'
+    flying-vehicle: '<red>Latanie pojazdem nie jest tu dozwolone.</red>'
+misc:
+  # Nether: survival/seasons tak, lobby nie (od Paper 26.x ustawienie przeniesione z server.properties)
+  enable-nether: false
+# Paper ma wbudowanego sparka — technik (uprawnienie spark) może profilować serwer.
+spark:
+  enabled: true
+  enable-immediately: false

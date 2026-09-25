@@ -1,0 +1,29 @@
+# Kudłacze — spigot.yml (tylko zmienione wartości; reszta uzupełniana domyślnymi)
+settings:
+  # Proxy to Velocity (modern forwarding w paper-global.yml), NIE BungeeCord
+  bungeecord: false
+  restart-on-crash: false
+  save-user-cache-on-stop-only: true
+  log-villager-deaths: false
+messages:
+  whitelist: '§cSerwer jest chwilowo zamknięty (whitelista).'
+  unknown-command: '§cNieznana komenda. Wpisz §e/pomoc§c.'
+  server-full: '§cSerwer jest pełny! Rangi ze zdobywanym slotem mogą wejść mimo to.'
+  outdated-client: '§cTwoja wersja gry jest za stara. Wymagana: {0}'
+  outdated-server: '§cSerwer używa starszej wersji ({0}).'
+  restart: '§5Kudłacze§7: restart serwera — zaraz wracamy!'
+world-settings:
+  default:
+    entity-activation-range:
+      animals: 24
+      monsters: 32
+      raiders: 48
+      misc: 12
+      water: 12
+      villagers: 24
+      flying-monsters: 48
+    merge-radius:
+      item: 3.5
+      exp: 4.0
+    mob-spawn-range: 6
+    item-despawn-rate: 6000

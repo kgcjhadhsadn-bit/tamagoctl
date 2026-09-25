@@ -1,0 +1,35 @@
+# =====================================================================
+#  Nadpisania do uruchomienia LOKALNEGO (laptop / CI).
+#  docker compose wczytuje ten plik automatycznie. Na VPS ustaw w .env:
+#      COMPOSE_FILE=docker-compose.yml
+#  żeby obowiązywały pełne limity z docker-compose.yml.
+# =====================================================================
+services:
+  mariadb:
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --innodb-buffer-pool-size=128M
+      - --max-connections=200
+      - --default-time-zone=+00:00
+    mem_limit: 512m
+
+  velocity:
+    environment:
+      MEMORY: 384m
+    mem_limit: 640m
+
+  lobby:
+    environment:
+      MEMORY: 768M
+    mem_limit: 1280m
+
+  survival:
+    environment:
+      MEMORY: 1536M
+    mem_limit: 2g
+
+  seasons:
+    environment:
+      MEMORY: 1152M
+    mem_limit: 1600m
