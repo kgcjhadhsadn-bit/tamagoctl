@@ -1,5 +1,6 @@
 # Sekrety — tylko .env.example trafia do repo
 .env
+secrets/
 
 # Pobrane jary (scripts/download-plugins.sh) i build pluginu core
 build/

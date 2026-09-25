@@ -1,0 +1,307 @@
+# =====================================================================
+#  Kudłacze — grupy, dziedziczenie i uprawnienia LuckPerms
+#  Stosowanie:  ./scripts/apply-permissions.sh   (komendy lecą przez RCON do lobby;
+#               LuckPerms synchronizuje zmiany do wszystkich serwerów przez MariaDB)
+#  Komendy są idempotentne — skrypt można uruchamiać wielokrotnie.
+#  Wszystkie rangi gameplay (VIP…TYTAN, DRWAL) są zdobywane W GRZE za Kłaki Czarodzieja
+#  (plugin core nadaje je czasowo na 30 dni). Nic tutaj nie jest sprzedawane — zgodność z EULA.
+# =====================================================================
+
+# ---------- grupy ----------
+lp creategroup default
+lp creategroup vip
+lp creategroup svip
+lp creategroup mvip
+lp creategroup uvip
+lp creategroup tytan
+lp creategroup drwal
+lp creategroup youtuber
+lp creategroup pomocnik
+lp creategroup moderator
+lp creategroup viceadmin
+lp creategroup admin
+lp creategroup technik
+
+# ---------- wagi (kolejność prefiksów i sortowania w TAB) ----------
+lp group default setweight 1
+lp group drwal setweight 5
+lp group vip setweight 10
+lp group svip setweight 20
+lp group mvip setweight 30
+lp group uvip setweight 40
+lp group tytan setweight 50
+lp group youtuber setweight 60
+lp group pomocnik setweight 100
+lp group moderator setweight 200
+lp group viceadmin setweight 300
+lp group admin setweight 400
+lp group technik setweight 450
+
+lp group vip setdisplayname VIP
+lp group svip setdisplayname SVIP
+lp group mvip setdisplayname MVIP
+lp group uvip setdisplayname UVIP
+lp group tytan setdisplayname TYTAN
+lp group drwal setdisplayname DRWAL
+lp group youtuber setdisplayname YouTuber
+lp group pomocnik setdisplayname Pomocnik
+lp group moderator setdisplayname Moderator
+lp group viceadmin setdisplayname ViceAdmin
+lp group admin setdisplayname Admin
+lp group technik setdisplayname Technik
+
+# ---------- dziedziczenie ----------
+# drabinka rang (każda wymaga poprzedniej — pilnuje tego plugin core przy zakupie)
+lp group vip parent add default
+lp group svip parent add vip
+lp group mvip parent add svip
+lp group uvip parent add mvip
+lp group tytan parent add uvip
+lp group drwal parent add default
+lp group youtuber parent add default
+# personel
+lp group pomocnik parent add default
+lp group moderator parent add pomocnik
+lp group viceadmin parent add moderator
+lp group admin parent add viceadmin
+# technik: moderacja + narzędzia techniczne (spark, diagnostyka), BEZ rozdawania przedmiotów
+lp group technik parent add moderator
+
+lp createtrack rangi
+lp track rangi append vip
+lp track rangi append svip
+lp track rangi append mvip
+lp track rangi append uvip
+lp track rangi append tytan
+lp createtrack personel
+lp track personel append pomocnik
+lp track personel append moderator
+lp track personel append viceadmin
+lp track personel append admin
+
+# ---------- prefiksy (TAB i czat czytają je z LuckPerms) ----------
+lp group default meta setprefix 1 "&7"
+lp group drwal meta setprefix 5 "&6[DRWAL] &f"
+lp group vip meta setprefix 10 "&a[VIP] &f"
+lp group svip meta setprefix 20 "&2[SVIP] &f"
+lp group mvip meta setprefix 30 "&b[MVIP] &f"
+lp group uvip meta setprefix 40 "&9[UVIP] &f"
+lp group tytan meta setprefix 50 "&5&l[TYTAN] &d"
+lp group youtuber meta setprefix 60 "&c[&fYT&c] &f"
+lp group pomocnik meta setprefix 100 "&e[Pomocnik] &f"
+lp group moderator meta setprefix 200 "&6[Moderator] &f"
+lp group viceadmin meta setprefix 300 "&c[ViceAdmin] &f"
+lp group admin meta setprefix 400 "&4&l[Admin] &c"
+lp group technik meta setprefix 450 "&3&l[Technik] &b"
+
+# ---------- meta: limity (czytane przez plugin core i wyświetlane w TAB/menu) ----------
+lp group default meta set kudlacze.dzialki 5
+lp group default meta set kudlacze.homes 3
+lp group vip meta set kudlacze.dzialki 15
+lp group vip meta set kudlacze.homes 5
+lp group svip meta set kudlacze.dzialki 30
+lp group svip meta set kudlacze.homes 10
+lp group svip meta set kudlacze.exp-mnoznik 1.5
+lp group mvip meta set kudlacze.dzialki 45
+lp group mvip meta set kudlacze.homes 15
+lp group uvip meta set kudlacze.dzialki 60
+lp group uvip meta set kudlacze.homes 20
+lp group tytan meta set kudlacze.dzialki 75
+lp group tytan meta set kudlacze.homes 25
+lp group tytan meta set kudlacze.exp-mnoznik 2.0
+
+# ===================== DEFAULT (każdy gracz) =====================
+lp group default permission set essentials.help true
+lp group default permission set essentials.helpop true
+lp group default permission set essentials.list true
+lp group default permission set essentials.motd true
+lp group default permission set essentials.rules true
+lp group default permission set essentials.spawn true
+lp group default permission set essentials.home true
+lp group default permission set essentials.sethome true
+lp group default permission set essentials.delhome true
+lp group default permission set essentials.sethome.multiple true
+lp group default permission set essentials.tpa true
+lp group default permission set essentials.tpaccept true
+lp group default permission set essentials.tpdeny true
+lp group default permission set essentials.tpacancel true
+lp group default permission set essentials.msg true
+lp group default permission set essentials.r true
+lp group default permission set essentials.mail true
+lp group default permission set essentials.mail.send true
+lp group default permission set essentials.ignore true
+lp group default permission set essentials.balance true
+lp group default permission set essentials.balance.others true
+lp group default permission set essentials.pay true
+lp group default permission set essentials.balancetop true
+lp group default permission set essentials.kit true
+lp group default permission set essentials.kits.start true
+lp group default permission set essentials.kits.jedzenie true
+lp group default permission set essentials.afk true
+lp group default permission set essentials.seen true
+lp group default permission set essentials.worth true
+lp group default permission set essentials.sell true
+# działki (ProtectionStones)
+lp group default permission set protectionstones.create true
+lp group default permission set protectionstones.destroy true
+lp group default permission set protectionstones.get true
+lp group default permission set protectionstones.home true
+lp group default permission set protectionstones.sethome true
+lp group default permission set protectionstones.tp true
+lp group default permission set protectionstones.info true
+lp group default permission set protectionstones.flags true
+lp group default permission set protectionstones.members true
+lp group default permission set protectionstones.owners true
+lp group default permission set protectionstones.list true
+lp group default permission set protectionstones.count true
+lp group default permission set protectionstones.name true
+lp group default permission set protectionstones.hide true
+lp group default permission set protectionstones.unhide true
+lp group default permission set protectionstones.unclaim true
+lp group default permission set protectionstones.view true
+lp group default permission set protectionstones.toggle true
+lp group default permission set protectionstones.buysell true
+lp group default permission set protectionstones.limit.5 true
+# PvP na działce może wyłączyć dopiero UVIP (flaga pvp)
+lp group default permission set protectionstones.flags.edit.pvp false
+# TAB (przełączanie scoreboardu)
+lp group default permission set tab.scoreboard.toggle true
+# plugin core — funkcje dostępne dla wszystkich
+lp group default permission set kudlacze.gracz true
+
+# ===================== VIP =====================
+lp group vip permission set essentials.sethome.multiple.vip true
+lp group vip permission set essentials.kits.vip true
+lp group vip permission set protectionstones.limit.15 true
+lp group vip permission set kudlacze.dzialka.vip true
+lp group vip permission set kudlacze.strefavip true
+lp group vip permission set kudlacze.expiarka true
+lp group vip permission set kudlacze.nagroda.codzienna true
+lp group vip permission set kudlacze.slot.rezerwacja true
+
+# ===================== SVIP =====================
+lp group svip permission set essentials.sethome.multiple.svip true
+lp group svip permission set essentials.enderchest true
+lp group svip permission set essentials.workbench true
+lp group svip permission set protectionstones.limit.30 true
+
+# ===================== MVIP =====================
+lp group mvip permission set essentials.sethome.multiple.mvip true
+lp group mvip permission set essentials.teleport.timer.bypass true
+lp group mvip permission set protectionstones.tp.bypasswait true
+lp group mvip permission set protectionstones.limit.45 true
+lp group mvip permission set kudlacze.tabliczki.kolory true
+lp group mvip permission set kudlacze.czat.kolory true
+
+# ===================== UVIP =====================
+lp group uvip permission set essentials.sethome.multiple.uvip true
+lp group uvip permission set essentials.back true
+lp group uvip permission set essentials.back.ondeath true
+lp group uvip permission set protectionstones.limit.60 true
+lp group uvip permission set protectionstones.flags.edit.pvp true
+lp group uvip permission set kudlacze.death.nokick true
+
+# ===================== TYTAN =====================
+lp group tytan permission set essentials.sethome.multiple.tytan true
+lp group tytan permission set protectionstones.limit.75 true
+lp group tytan permission set kudlacze.dzialka.tytan true
+lp group tytan permission set kudlacze.bruk true
+lp group tytan permission set kudlacze.piec true
+lp group tytan permission set kudlacze.czat.gradienty true
+
+# ===================== DRWAL =====================
+lp group drwal permission set kudlacze.drwal true
+
+# ===================== YOUTUBER (nadaje tylko admin) =====================
+lp group youtuber permission set kudlacze.youtuber.reklama true
+
+# ===================== POMOCNIK =====================
+lp group pomocnik permission set essentials.sethome.multiple.staff true
+lp group pomocnik permission set essentials.helpop.receive true
+lp group pomocnik permission set essentials.tp true
+lp group pomocnik permission set essentials.kick true
+lp group pomocnik permission set essentials.seen.extra true
+lp group pomocnik permission set libertybans.commands true
+lp group pomocnik permission set libertybans.warn.do.target.uuid true
+lp group pomocnik permission set libertybans.warn.do.notify true
+lp group pomocnik permission set libertybans.mute.do.target.uuid true
+lp group pomocnik permission set libertybans.mute.do.notify true
+lp group pomocnik permission set libertybans.kick.do.target.uuid true
+lp group pomocnik permission set libertybans.kick.do.notify true
+lp group pomocnik permission set libertybans.list.history true
+lp group pomocnik permission set libertybans.list.warns true
+lp group pomocnik permission set libertybans.list.mutelist true
+lp group pomocnik permission set coreprotect.inspect true
+lp group pomocnik permission set coreprotect.lookup true
+lp group pomocnik permission set coreprotect.help true
+lp group pomocnik permission set grim.alerts true
+lp group pomocnik permission set grim.alerts.enable-on-join true
+lp group pomocnik permission set kudlacze.personel true
+lp group pomocnik permission set kudlacze.death.nokick true
+lp group pomocnik permission set kudlacze.afk.bypass true
+lp group pomocnik permission set kudlacze.slot.rezerwacja true
+
+# ===================== MODERATOR =====================
+lp group moderator permission set libertybans.ban.do.target.uuid true
+lp group moderator permission set libertybans.ban.do.notify true
+lp group moderator permission set libertybans.ban.undo.target.uuid true
+lp group moderator permission set libertybans.mute.undo.target.uuid true
+lp group moderator permission set libertybans.warn.undo.target.uuid true
+lp group moderator permission set libertybans.list.banlist true
+lp group moderator permission set libertybans.list.blame true
+lp group moderator permission set libertybans.alts.command true
+lp group moderator permission set libertybans.alts.autoshow true
+lp group moderator permission set coreprotect.rollback true
+lp group moderator permission set coreprotect.restore true
+lp group moderator permission set coreprotect.teleport true
+lp group moderator permission set essentials.vanish true
+lp group moderator permission set essentials.invsee true
+lp group moderator permission set essentials.enderchest.others true
+lp group moderator permission set essentials.socialspy true
+lp group moderator permission set essentials.tphere true
+lp group moderator permission set essentials.fly true
+lp group moderator permission set essentials.gamemode true
+lp group moderator permission set essentials.gamemode.spectator true
+lp group moderator permission set protectionstones.info.others true
+lp group moderator permission set protectionstones.list.others true
+lp group moderator permission set protectionstones.view.others true
+lp group moderator permission set kudlacze.chaty.admin true
+
+# ===================== VICEADMIN =====================
+lp group viceadmin permission set libertybans.ban.do.target.ip true
+lp group viceadmin permission set libertybans.ban.undo.target.ip true
+lp group viceadmin permission set libertybans.admin.viewips true
+lp group viceadmin permission set essentials.gamemode.creative true
+lp group viceadmin permission set essentials.gamemode.survival true
+lp group viceadmin permission set essentials.gamemode.adventure true
+lp group viceadmin permission set essentials.heal true
+lp group viceadmin permission set essentials.feed true
+lp group viceadmin permission set protectionstones.admin true
+lp group viceadmin permission set worldguard.region.* true
+lp group viceadmin permission set worldedit.* true
+lp group viceadmin permission set kudlacze.kc.podglad true
+
+# ===================== ADMIN =====================
+# pełny dostęp (w tym rozdawanie przedmiotów, ekonomia, KC, edycje, sezony)
+lp group admin permission set * true
+
+# ===================== TECHNIK =====================
+# diagnostyka i konsola (spark, wersje, TPS) — BEZ rozdawania przedmiotów i ekonomii
+lp group technik permission set spark true
+lp group technik permission set bukkit.command.plugins true
+lp group technik permission set bukkit.command.version true
+lp group technik permission set bukkit.command.tps true
+lp group technik permission set paper.command.mspt true
+lp group technik permission set luckperms.info true
+lp group technik permission set luckperms.verbose true
+lp group technik permission set luckperms.tree true
+lp group technik permission set luckperms.user.info true
+lp group technik permission set luckperms.group.info true
+lp group technik permission set libertybans.admin.debug true
+lp group technik permission set kudlacze.technik true
+lp group technik permission set essentials.give false
+lp group technik permission set essentials.item false
+lp group technik permission set essentials.more false
+lp group technik permission set essentials.eco false
+lp group technik permission set minecraft.command.give false
+lp group technik permission set kudlacze.kc.admin false

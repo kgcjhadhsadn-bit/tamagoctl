@@ -7,7 +7,7 @@
 #                ./scripts/update-lock.sh --apply (zapis nowych wersji/URL/SHA256)
 #
 #  Pola wpisu:
-#    source   papermc | modrinth | hangar | github | geysermc | url
+#    source   papermc | modrinth | hangar | github | geysermc | jenkins | url
 #    project  identyfikator projektu w danym źródle (slug / owner/repo)
 #    platform loader/platforma (paper, velocity, spigot…), asset = regex nazwy pliku
 #    targets  gdzie trafia jar: server-jar, proxy-jar, proxy, common (wszystkie backendy),
@@ -71,22 +71,13 @@ entries:
   - name: viaversion
     source: modrinth
     project: viaversion
-    platform: velocity
+    platform: paper
     version: "5.12.0"
     file: ViaVersion.jar
-    targets: [proxy]
+    targets: [common]
     url: "https://cdn.modrinth.com/data/P1OZGk5p/versions/FaishMnD/ViaVersion-5.12.0.jar"
     sha256: c4d512fa9760fa41d17abaedde12aa1f4c9bde920d0a992fe0fc016962f126be
-
-  - name: viabackwards
-    source: modrinth
-    project: viabackwards
-    platform: velocity
-    version: "5.12.0"
-    file: ViaBackwards.jar
-    targets: [proxy]
-    url: "https://cdn.modrinth.com/data/NpvuJQoq/versions/SxGhdsPK/ViaBackwards-5.12.0.jar"
-    sha256: f902f7da7eb99e8bfaf461f80283c4e2750b7d9727e6b508ea4bb9163f55b1db
+    note: "Na backendach, nie na proxy: GrimAC nie działa poprawnie z ViaVersion na Velocity"
 
   - name: luckperms-paper
     source: modrinth
@@ -109,27 +100,25 @@ entries:
     sha256: 21570aff9ce17d6983928e8552777760e1ede5050026b04c686b0ae112e6fd7e
 
   - name: essentialsx
-    source: modrinth
-    project: essentialsx
-    platform: paper
-    mc: "26.1.2"
-    version: "2.22.0"
+    source: jenkins
+    project: "https://ci.ender.zone/job/EssentialsX"
+    asset: "EssentialsX-[0-9.]+-dev\\+[0-9]+-[0-9a-f]+\\.jar"
+    version: "2.22.1-dev+24-49a2f10 (#1829)"
     file: EssentialsX.jar
     targets: [common]
-    url: "https://cdn.modrinth.com/data/hXiIvTyT/versions/nY6VN1XH/EssentialsX-2.22.0.jar"
-    sha256: bda4685105977fca2e209820a9f0ad24275bd103390a03236f38e59bfdac58e6
-    note: "EssentialsX 2.22 wspiera 26.2 (changelog), ale na Modrinth otagowano tylko 26.1.2"
+    url: "https://ci.ender.zone/job/EssentialsX/1829/artifact/jars/EssentialsX-2.22.1-dev+24-49a2f10.jar"
+    sha256: 3c4de587ec8bfc6d6acfc7317052671fe9d209ecaa2c85f545d6650d3cc479aa
+    note: "Oficjalny build dev z CI EssentialsX: wydanie 2.22.0 wspiera tylko do 26.1.2, wsparcie 26.2/26.3 jest na gałęzi 2.x"
 
   - name: essentialsx-spawn
-    source: modrinth
-    project: essentialsx-spawn
-    platform: paper
-    mc: "26.1.2"
-    version: "2.22.0"
+    source: jenkins
+    project: "https://ci.ender.zone/job/EssentialsX"
+    asset: "EssentialsXSpawn-[0-9.]+-dev\\+[0-9]+-[0-9a-f]+\\.jar"
+    version: "2.22.1-dev+24-49a2f10 (#1829)"
     file: EssentialsXSpawn.jar
     targets: [common]
-    url: "https://cdn.modrinth.com/data/sYpvDxGJ/versions/lc5JHiNJ/EssentialsXSpawn-2.22.0.jar"
-    sha256: dd5377c4c921b9b67814209f4f6646ffbb959729003e721ec5e63c47c7c010b8
+    url: "https://ci.ender.zone/job/EssentialsX/1829/artifact/jars/EssentialsXSpawn-2.22.1-dev+24-49a2f10.jar"
+    sha256: 89ca6e3e0624fd6d751054e9690d477dbdf758e85e72bef967450a8f5d8f931c
 
   - name: vaultunlocked
     source: modrinth

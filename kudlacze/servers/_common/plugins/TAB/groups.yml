@@ -1,0 +1,7 @@
+# Kudłacze — prefiksy w TAB pochodzą z LuckPerms (meta prefix/suffix grup, patrz permissions/luckperms.txt)
+_DEFAULT_:
+  tabprefix: "%luckperms-prefix%"
+  tagprefix: "%luckperms-prefix%"
+  customtabname: "%player%"
+  tabsuffix: "%kudlacze_tytul_tab%"
+  tagsuffix: "%luckperms-suffix%"

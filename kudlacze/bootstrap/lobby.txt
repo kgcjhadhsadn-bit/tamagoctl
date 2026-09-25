@@ -1,0 +1,34 @@
+# =====================================================================
+#  Kudłacze — bootstrap lobby (NPC, hologramy, spawn).
+#  Plugin core wykonuje ten plik jednorazowo (po zmianie treści ponownie), a ręcznie:
+#      scripts/lib/rcon-apply.sh bootstrap/lobby.txt lobby
+#  Komendy FancyNpcs / DecentHolograms są idempotentne (istniejący obiekt = komunikat, bez zmian).
+# =====================================================================
+setworldspawn 0 -60 0
+# nazwy gamerule w 26.x (snake_case) — sprawdzone w org.bukkit.GameRules (Paper 26.2)
+gamerule respawn_radius 0
+gamerule advance_time false
+gamerule advance_weather false
+gamerule spawn_mobs false
+gamerule fire_spread_radius_around_player 0
+gamerule show_advancement_messages false
+gamerule pvp false
+gamerule fall_damage false
+gamerule keep_inventory true
+time set 6000
+weather clear
+
+# --- Przewoźnik: selektor trybów ---
+npc create Przewoznik --location 0.5 -60 6.5 --world world
+npc displayname Przewoznik <gradient:#c77dff:#7b2cbf><b>Przewoźnik</b></gradient>
+npc turn_to_player Przewoznik true
+npc glowing Przewoznik light_purple
+npc action Przewoznik any_click clear
+npc action Przewoznik any_click add player_command serwery
+npc interaction_cooldown Przewoznik 1s
+
+# --- Hologramy ---
+dh create powitanie -l:world:0.5:-57.5:3.5 <#c77dff>&lKUDŁACZE
+dh line add powitanie 1 &fSerwer z kudłami! &6SURVIVAL + DZIAŁKI
+dh line add powitanie 1 &7Kliknij &5Przewoźnika&7, aby wybrać tryb
+dh line add powitanie 1 &7Regulamin: &e/regulamin &7• Menu: &e/menu

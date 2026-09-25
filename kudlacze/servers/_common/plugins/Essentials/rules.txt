@@ -1,0 +1,8 @@
+&5&lRegulamin Kudłaczy &7(pełna wersja: &e/regulamin&7)
+&f1. &7Poza działkami survival jest brutalny: wolno walczyć, kraść i oszukiwać.
+&f2. &cGriefowanie działek jest zakazane.
+&f3. &7Zakaz cheatów, bugowania i wykorzystywania błędów.
+&f4. &7Zakaz farm AFK (tzw. afkczarek) — AFK nie zdobywa nagród.
+&f5. &7Zakaz reklamy innych serwerów, spamu i pisania capsem.
+&f6. &7Zakaz handlu przedmiotami i kontami za prawdziwe pieniądze.
+&f7. &7Szanuj innych graczy i administrację.

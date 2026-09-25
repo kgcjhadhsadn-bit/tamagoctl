@@ -1,0 +1,23 @@
+# Kudłacze — commands.yml (Bukkit). Aliasy kierują komendy kar do LibertyBans,
+# bo EssentialsX rejestruje /ban, /mute, /kick i /unban wcześniej.
+command-block-overrides: []
+ignore-vanilla-permissions: false
+aliases:
+  ban:
+  - libertybans:ban $1-
+  tempban:
+  - libertybans:ban $1-
+  banip:
+  - libertybans:ipban $1-
+  unban:
+  - libertybans:unban $1-
+  unbanip:
+  - libertybans:unbanip $1-
+  mute:
+  - libertybans:mute $1-
+  tempmute:
+  - libertybans:mute $1-
+  unmute:
+  - libertybans:unmute $1-
+  kick:
+  - libertybans:kick $1-

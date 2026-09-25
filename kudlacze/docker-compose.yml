@@ -68,6 +68,14 @@ x-paper-env: &paper-env
 
 x-paper-service: &paper-service
   image: itzg/minecraft-server:2026.9.2-java25
+  # wspólny klucz Floodgate (secrets/, poza gitem) trafia na standardowe miejsce przed startem
+  entrypoint:
+    - /bin/sh
+    - -c
+    - >-
+      install -d -o 1000 -g 1000 /data/plugins/floodgate &&
+      install -o 1000 -g 1000 -m 644 /secrets/floodgate-key.pem /data/plugins/floodgate/key.pem &&
+      exec /image/scripts/start
   restart: unless-stopped
   tty: true
   stdin_open: true
@@ -107,6 +115,13 @@ services:
 
   velocity:
     image: itzg/mc-proxy:2026.9.2-java25
+    entrypoint:
+      - /bin/sh
+      - -c
+      - >-
+        mkdir -p /server/plugins/floodgate &&
+        cp /secrets/floodgate-key.pem /server/plugins/floodgate/key.pem &&
+        exec /__cacert_entrypoint.sh /usr/bin/run-bungeecord.sh
     restart: unless-stopped
     tty: true
     stdin_open: true
@@ -120,7 +135,12 @@ services:
       SKIP_DOWNLOAD_DEFAULTS: "true"
       # healthcheck obrazu dla TYPE=CUSTOM domyślnie pinguje 25577 (BungeeCord)
       SERVER_PORT: "25565"
-      MEMORY: 768m
+      # usuwa jary pluginów spoza build/plugins/proxy (np. po aktualizacji locka)
+      REMOVE_OLD_MODS: "TRUE"
+      REMOVE_OLD_MODS_INCLUDE: "*.jar"
+      REMOVE_OLD_MODS_DEPTH: "1"
+      # sterta 512 MB; reszta limitu 1 GB to pamięć poza stertą (Geyser, ViaVersion, Netty)
+      MEMORY: 512m
       TZ: ${TZ:-Europe/Warsaw}
       VELOCITY_FORWARDING_SECRET: ${VELOCITY_SECRET:?Uzupełnij VELOCITY_SECRET w .env}
       REPLACE_ENV_DURING_SYNC: "true"
@@ -141,6 +161,7 @@ services:
       - ./proxy/velocity:/config:ro
       - ./build/plugins/proxy:/plugins:ro
       - ./build/jars/velocity.jar:/jars/velocity.jar:ro
+      - ./secrets:/secrets:ro
     mem_limit: 1g
     networks: [kudlacze]
 
@@ -148,7 +169,8 @@ services:
     <<: *paper-service
     environment:
       <<: *paper-env
-      MEMORY: 1536M
+      # limit 2 GB = sterta 1.25 GB + ~0.75 GB poza stertą (metaspace, JIT, Netty, pluginy)
+      MEMORY: 1280M
       CFG_SERVER_NAME: lobby
     volumes:
       - ./data/lobby:/data
@@ -157,13 +179,15 @@ services:
       - ./build/plugins/common:/plugins-common:ro
       - ./build/plugins/lobby:/plugins:ro
       - ./build/jars/paper.jar:/jars/paper.jar:ro
+      - ./secrets:/secrets:ro
     mem_limit: 2g
 
   survival:
     <<: *paper-service
     environment:
       <<: *paper-env
-      MEMORY: 5G
+      # limit 6 GB = sterta 4.75 GB + ~1.25 GB poza stertą
+      MEMORY: 4864M
       CFG_SERVER_NAME: survival
     volumes:
       - ./data/survival:/data
@@ -172,13 +196,15 @@ services:
       - ./build/plugins/common:/plugins-common:ro
       - ./build/plugins/survival:/plugins:ro
       - ./build/jars/paper.jar:/jars/paper.jar:ro
+      - ./secrets:/secrets:ro
     mem_limit: 6g
 
   seasons:
     <<: *paper-service
     environment:
       <<: *paper-env
-      MEMORY: 3276M
+      # limit 4 GB = sterta 3 GB + ~1 GB poza stertą
+      MEMORY: 3G
       CFG_SERVER_NAME: seasons
     volumes:
       - ./data/seasons:/data
@@ -187,6 +213,7 @@ services:
       - ./build/plugins/common:/plugins-common:ro
       - ./build/plugins/seasons:/plugins:ro
       - ./build/jars/paper.jar:/jars/paper.jar:ro
+      - ./secrets:/secrets:ro
     mem_limit: 4g
 
 networks:

@@ -1,0 +1,64 @@
+# Selektor trybów — otwierany przez NPC Przewoźnika w lobby oraz komendą /serwery
+open_command:
+  - serwery
+  - tryby
+size: 27
+menu_title: '&5&lPrzewoźnik &8» &7wybierz tryb'
+items:
+  'tlo':
+    material: PURPLE_STAINED_GLASS_PANE
+    slots: [0,1,2,3,4,5,6,7,8,9,10,12,14,16,17,18,19,20,21,22,23,24,25,26]
+    display_name: ' '
+  'survival':
+    material: GRASS_BLOCK
+    slot: 11
+    display_name: '&a&lSURVIVAL + DZIAŁKI'
+    lore:
+      - '&7Klasyczny survival: stawiasz działkę,'
+      - '&7budujesz, handlujesz. Poza działkami'
+      - '&7wolno walczyć i kraść — griefowanie'
+      - '&7działek jest zakazane!'
+      - ''
+      - '&7Online: &f%kudlacze_online_survival%'
+      - '&7Edycja: &b#%kudlacze_edycja%'
+      - ''
+      - '&e» Kliknij, aby dołączyć'
+    left_click_commands:
+      - '[close]'
+      - '[connect] survival'
+    right_click_commands:
+      - '[close]'
+      - '[connect] survival'
+  'seasons':
+    material: DRAGON_HEAD
+    slot: 13
+    display_name: '&d&lSEASONS'
+    lore:
+      - '&7Survival z resetem co miesiąc.'
+      - '&7Questy u Kwatermistrza, ranking,'
+      - '&7co niedzielę o 20:00 &cSmok Kudłaty&7!'
+      - ''
+      - '&7Online: &f%kudlacze_online_seasons%'
+      - ''
+      - '&e» Kliknij, aby dołączyć'
+    left_click_commands:
+      - '[close]'
+      - '[connect] seasons'
+    right_click_commands:
+      - '[close]'
+      - '[connect] seasons'
+  'lobby':
+    material: COMPASS
+    slot: 15
+    display_name: '&b&lLOBBY'
+    lore:
+      - '&7Wróć na spawn sieci:'
+      - '&7parkour, rankingi, informacje.'
+      - ''
+      - '&e» Kliknij, aby przejść'
+    left_click_commands:
+      - '[close]'
+      - '[connect] lobby'
+    right_click_commands:
+      - '[close]'
+      - '[connect] lobby'

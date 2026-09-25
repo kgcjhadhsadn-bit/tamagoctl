@@ -1,0 +1,12 @@
+# Kudłacze — DeluxeMenus. Menu działają też na Bedrock (Geyser tłumaczy GUI skrzyni);
+# przepływy pluginu core (rangi, questy) mają dodatkowo formularze Floodgate.
+check_updates: false
+debug: LOW
+use_admin_commands_in_menus_list: false
+menus_list_page_size: 10
+metas_list_page_size: 15
+gui_menus:
+  serwery:
+    file: serwery.yml
+  menu:
+    file: menu.yml

@@ -12,3 +12,28 @@ The server will make no attempt to authenticate usernames
 Whilst this makes it possible to use Velocity
 docs\.papermc\.io/velocity/security
 To change this, set "online-mode" to "true"
+
+# Velocity: ViaVersion/Geyser/Floodgate podpinają się pod pipeline Netty (tak działają te pluginy).
+The (server|backend) channel initializer has been replaced by
+
+# DeluxeMenus / NBT-API w DecentHolograms nie mają jeszcze hooków NMS dla 26.2 — dotyczy tylko
+# opcji nbt_* w przedmiotach menu, których Kudłacze nie używają.
+Could not setup a NMS hook for your server version
+\[NBTAPI\] This Server-Version\(26\.2
+NBT-API could not be loaded
+
+# FancyNpcs: skórki NPC działają bez klucza API MineSkin (limit zapytań jest niższy).
+Creating MineSkinClient without API key
+
+# ChunkyBorder przy pierwszym starcie (granice ustawia plugin core przy starcie świata/edycji).
+No saved borders found
+
+# DiscordSRV bez tokenu (DISCORD_BOT_TOKEN w .env pusty) — Discord wyłączony, serwer działa normalnie.
+No bot token has been set in the config
+
+# LibertyBans rejestruje /ban, /mute, /kick, /unban obok EssentialsX; aliasy w commands.yml
+# kierują te komendy do LibertyBans (libertybans:ban itd.).
+LibertyBans attempted to register '/(ban|mute|kick|unban|unbanip)'
+
+# CoreProtect: wewnętrzna pula HikariCP ma keepaliveTime >= maxLifetime (nie da się tego skonfigurować).
+HikariPool-1 - keepaliveTime is greater than or equal to maxLifetime

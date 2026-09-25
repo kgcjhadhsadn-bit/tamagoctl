@@ -31,4 +31,13 @@ fill VELOCITY_SECRET 48
 fill RCON_PASSWORD 32
 fill KC_ITEM_SECRET 64
 
+# Wspólny klucz Floodgate (AES-128, 16 bajtów) dla Velocity i wszystkich backendów
+mkdir -p secrets
+if [[ ! -s secrets/floodgate-key.pem ]]; then
+  head -c 16 /dev/urandom > secrets/floodgate-key.pem
+  echo "[init-env] Wygenerowano secrets/floodgate-key.pem"
+fi
+# kontenery działają jako uid 1000 — plik musi być czytelny (katalog secrets/ jest poza gitem)
+chmod 644 secrets/floodgate-key.pem
+
 echo "[init-env] Gotowe. Uzupełnij ręcznie SERVER_DOMAIN, DISCORD_* i RESOURCE_PACK_* w .env."

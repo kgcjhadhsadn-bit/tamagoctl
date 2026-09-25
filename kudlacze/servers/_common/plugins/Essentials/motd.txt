@@ -1,0 +1,4 @@
+&5&l✦ Witaj na Kudłaczach, {PLAYER}&5&l! ✦
+&7Serwer z kudłami! &6SURVIVAL + DZIAŁKI
+&7Menu: &e/menu &7• Tryby: &e/serwery &7• Regulamin: &e/regulamin
+&7Graczy online: &f{ONLINE} &7• Czas w świecie: &f{WORLDTIME24}

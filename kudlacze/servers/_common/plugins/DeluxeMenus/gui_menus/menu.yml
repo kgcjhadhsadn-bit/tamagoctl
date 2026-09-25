@@ -1,0 +1,50 @@
+# Menu główne Kudłaczy — /menu
+open_command: menu
+size: 27
+menu_title: '&5&lKudłacze &8» &7menu'
+items:
+  'tlo':
+    material: BLACK_STAINED_GLASS_PANE
+    slots: [0,1,2,3,4,5,6,7,8,18,19,20,21,22,23,24,25,26]
+    display_name: ' '
+  'tryby':
+    material: ENDER_PEARL
+    slot: 10
+    display_name: '&d&lTryby gry'
+    lore: ['&7Survival, Seasons, Lobby', '', '&e» Kliknij']
+    left_click_commands: ['[openguimenu] serwery']
+  'dzialki':
+    material: EMERALD_ORE
+    slot: 11
+    display_name: '&a&lDziałki'
+    lore: ['&7Postaw kamień działki, aby', '&7chronić swój teren.', '&7Pomoc: &f/ps pomoc', '', '&e» Kliknij']
+    left_click_commands: ['[close]', '[player] ps help']
+  'rangi':
+    material: AMETHYST_SHARD
+    slot: 12
+    display_name: '&5&lRangi za Kłaki Czarodzieja'
+    lore: ['&7VIP → SVIP → MVIP → UVIP → TYTAN', '&7zdobywane wyłącznie w grze.', '', '&e» Kliknij']
+    left_click_commands: ['[close]', '[player] rangi']
+  'kc':
+    material: PURPLE_DYE
+    slot: 13
+    display_name: '&d&lMoje Kłaki (KC)'
+    lore: ['&7Saldo: &5%kudlacze_kc% KC', '&7Wpłać/wypłać: &f/wplac&7, &f/wyplac', '', '&e» Kliknij']
+    left_click_commands: ['[close]', '[player] kc']
+  'ranking':
+    material: GOLDEN_HELMET
+    slot: 14
+    display_name: '&6&lRanking Seasons'
+    lore: ['&7Najlepsi gracze sezonu', '', '&e» Kliknij']
+    left_click_commands: ['[close]', '[player] ranking']
+  'nagroda':
+    material: CHEST
+    slot: 15
+    display_name: '&e&lCodzienna nagroda'
+    lore: ['&7Odbierz u &eSkarbnika &7w strefie VIP', '&7(ranga VIP i wyżej).']
+  'regulamin':
+    material: WRITABLE_BOOK
+    slot: 16
+    display_name: '&c&lRegulamin'
+    lore: ['&7Przeczytaj, zanim zaczniesz grać!', '', '&e» Kliknij']
+    left_click_commands: ['[close]', '[player] regulamin']

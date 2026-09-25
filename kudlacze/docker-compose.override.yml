@@ -14,22 +14,23 @@ services:
       - --default-time-zone=+00:00
     mem_limit: 512m
 
+  # sterta + ~0.5-0.8 GB pamięci poza stertą (inaczej cgroup zabija JVM z exitCode -1)
   velocity:
     environment:
       MEMORY: 384m
-    mem_limit: 640m
+    mem_limit: 900m
 
   lobby:
     environment:
       MEMORY: 768M
-    mem_limit: 1280m
+    mem_limit: 1600m
 
   survival:
     environment:
       MEMORY: 1536M
-    mem_limit: 2g
+    mem_limit: 2400m
 
   seasons:
     environment:
-      MEMORY: 1152M
-    mem_limit: 1600m
+      MEMORY: 1G
+    mem_limit: 1800m

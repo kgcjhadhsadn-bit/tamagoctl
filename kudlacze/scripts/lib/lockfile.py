@@ -316,6 +316,19 @@ def resolve_geysermc(e: dict, mc: str, data: dict) -> dict:
     return {"version": f"{b['version']}-b{b['build']}", "url": url, "sha256": dl["sha256"]}
 
 
+def resolve_jenkins(e: dict, mc: str, data: dict) -> dict:
+    """Oficjalne CI projektu (np. buildy dev EssentialsX); project = URL joba."""
+    job = e["project"].rstrip("/")
+    tree = "number,url,artifacts[fileName,relativePath]"
+    b = http_json(f"{job}/lastSuccessfulBuild/api/json?tree={urllib.parse.quote(tree, safe=',[]')}")
+    for a in b["artifacts"]:
+        if re.fullmatch(e["asset"], a["fileName"]):
+            ver = re.sub(r"^[A-Za-z]+-|\.jar$", "", a["fileName"])
+            return {"version": f"{ver} (#{b['number']})",
+                    "url": f"{b['url'].rstrip('/')}/artifact/{a['relativePath']}", "sha256": None}
+    raise RuntimeError(f"Jenkins {job} #{b['number']}: brak artefaktu pasującego do {e['asset']}")
+
+
 def _ver(v: str) -> tuple:
     return tuple(int(x) for x in re.findall(r"\d+", v))
 
@@ -337,6 +350,7 @@ RESOLVERS = {
     "hangar": resolve_hangar,
     "github": resolve_github,
     "geysermc": resolve_geysermc,
+    "jenkins": resolve_jenkins,
 }
 
 
