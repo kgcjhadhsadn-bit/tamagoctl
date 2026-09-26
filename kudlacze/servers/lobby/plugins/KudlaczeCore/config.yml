@@ -33,6 +33,12 @@ moduly:
   sezony: false
   smok: false
   edycje: false
+  afk: true
+  konkurs: false
+  parkour: true
+  sklep: true
+  logi-kar: false
+  restart: true
 
 smierc:
   tryb: DISABLED
@@ -44,3 +50,8 @@ lobby:
 
 bootstrap:
   buduj-spawn: false
+
+# Lobby: dłuższa tolerancja AFK (nikt tu nie zdobywa nagród za czas gry)
+afk:
+  po-minutach: 5
+  kick-po-minutach: 20

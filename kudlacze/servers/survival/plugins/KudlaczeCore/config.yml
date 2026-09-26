@@ -33,6 +33,12 @@ moduly:
   sezony: false
   smok: false
   edycje: true
+  afk: true
+  konkurs: true
+  parkour: false
+  sklep: true
+  logi-kar: true
+  restart: true
 
 # Śmierć = kick + blokada wejścia na 5 minut (UVIP+ omija: kudlacze.death.nokick)
 smierc:
@@ -46,3 +52,7 @@ bootstrap:
 # Nowa edycja: czyszczenie logów bloków CoreProtect starego świata (tabele co_survival_*)
 reset:
   coreprotect-prefiks: co_survival_
+
+# Logi kar LibertyBans → Discord #logi-kar (tylko ten serwer — kary z całej sieci są we wspólnej bazie)
+logi-kar:
+  co-ile-sekund: 15

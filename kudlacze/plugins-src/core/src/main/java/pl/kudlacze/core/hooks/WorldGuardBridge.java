@@ -71,6 +71,20 @@ public final class WorldGuardBridge {
         return count;
     }
 
+    /** Czy gracz jest właścicielem działki ProtectionStones (region „ps…”) w tym miejscu. */
+    public boolean ownsPlotAt(Player player, org.bukkit.Location location) {
+        RegionManager rm = manager(location.getWorld());
+        if (rm == null) {
+            return false;
+        }
+        for (ProtectedRegion r : rm.getApplicableRegions(BukkitAdapter.asBlockVector(location))) {
+            if (r.getId().startsWith("ps") && r.getOwners().contains(player.getUniqueId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static RegionManager manager(World world) {
         return WorldGuard.getInstance().getPlatform().getRegionContainer().get(BukkitAdapter.adapt(world));
     }

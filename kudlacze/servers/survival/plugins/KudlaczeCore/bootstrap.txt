@@ -48,3 +48,13 @@ dh create spawn_info -l:{swiat}:{sx+0.5}:{sy+3.5}:{sz+0.5} <#c77dff>&lKUDŁACZE 
 dh line add spawn_info 1 &7Postaw kamień działki, aby chronić swój dom: &e/ps
 dh line add spawn_info 1 &7Rangi za Kłaki Czarodzieja: &5Czarodziej Kudłacz &7(&e/rangi&7)
 dh line add spawn_info 1 &7Strefa VIP &8→ &7na wschód od placu • Regulamin: &e/regulamin
+
+npc remove Kustosz
+npc create Kustosz --location {sx-5.5} {sy} {sz+0.5} --world {swiat}
+npc type Kustosz WANDERING_TRADER
+npc displayname Kustosz <gold><b>Kustosz</b></gold><newline><gray>konkurs Kudłate Chaty
+npc turn_to_player Kustosz true
+npc action Kustosz any_click clear
+npc action Kustosz any_click add player_command chaty
+npc interaction_cooldown Kustosz 1s
+

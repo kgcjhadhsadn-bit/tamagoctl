@@ -280,6 +280,8 @@ lp group viceadmin permission set protectionstones.admin true
 lp group viceadmin permission set worldguard.region.* true
 lp group viceadmin permission set worldedit.* true
 lp group viceadmin permission set kudlacze.kc.podglad true
+lp group viceadmin permission set kudlacze.smok.admin true
+lp group viceadmin permission set kudlacze.edycja.end.omin true
 
 # ===================== ADMIN =====================
 # pełny dostęp (w tym rozdawanie przedmiotów, ekonomia, KC, edycje, sezony)

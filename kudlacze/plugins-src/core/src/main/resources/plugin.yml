@@ -58,6 +58,16 @@ commands:
     description: Wybór tytułu kosmetycznego
     usage: /tytul [ustaw <tytuł>|zdejmij]
     aliases: [tytuly]
+  chaty:
+    description: Konkurs budowlany Kudłate Chaty
+    usage: /chaty [zgloszenie [opis]|wycofaj|lista|tp|ocen|wyniki|okno]
+    aliases: [kudlatechaty, kustosz]
+  parkour:
+    description: Parkour w lobby
+    usage: /parkour [top|wyjdz]
+  sklep:
+    description: Sklep kosmetyczny (wyłączony)
+    usage: /sklep
   kudlaczeadmin:
     description: Administracja pluginem core
     usage: /kudlaczeadmin <bootstrap|moduly>
@@ -133,4 +143,10 @@ permissions:
     default: op
   kudlacze.tytul.admin:
     description: /tytul nadaj|odbierz
+    default: op
+  kudlacze.chaty.admin:
+    description: Kudłate Chaty — lista, teleport, ocena, wyniki, okno zgłoszeń
+    default: op
+  kudlacze.sklep.admin:
+    description: /sklep wydaj (tylko gdy sklep kosmetyczny jest włączony)
     default: op

@@ -36,6 +36,12 @@ moduly:
   sezony: false
   smok: false
   edycje: false
+  afk: false
+  konkurs: false
+  parkour: false
+  sklep: false
+  logi-kar: false
+  restart: false
 
 waluta:
   # sekret HMAC przedmiotów KC — ten sam na wszystkich serwerach (KC_ITEM_SECRET w .env)
@@ -155,4 +161,43 @@ edycja:
 # Czyszczenie logów bloków CoreProtect starego świata przy resecie (prefiks tabel serwera, puste = nie)
 reset:
   coreprotect-prefiks: ''
+
+# Anty-AFK: AFK = brak ruchu kamery, czatu i nieregularnych kliknięć. AFK nie dostaje nagród za czas gry.
+afk:
+  po-minutach: 5
+  kick-po-minutach: 15
+  ostrzezenie-sekund: 60
+  # autoklikacz: stały rytm ataków (współczynnik zmienności odstępów < makro-cv na ostatnich N kliknięciach)
+  okno-klikniec: 20
+  makro-cv: 0.03
+
+# Kudłate Chaty (survival): zgłoszenia w ostatnich edycja.konkurs-dni dniach edycji
+konkurs:
+  wymagaj-dzialki: true
+  nagrody-kc: [60, 40, 20]
+  tytuly: [mistrz-chat, architekt, budowniczy]
+
+# Codzienny restart (kontener wstaje sam — restart: unless-stopped); backup hosta o 04:00
+restart:
+  godzina: '05:00'
+  ostrzezenia-minut: [15, 5, 1]
+
+# Parkour w lobby (trasę buduje bootstrap.txt lobby — współrzędne muszą się zgadzać)
+parkour:
+  swiat: world
+  posadzka-y: -60
+  start: {x: 12, y: -60, z: 0}
+  punkty-kontrolne:
+    - {x: 20, y: -56, z: -1}
+  meta: {x: 28, y: -52, z: 0}
+
+# Sklep kosmetyczny — WYŁĄCZONY. Dozwolone typy: TYTUL, KOLOR_NICKU, CZASTECZKI (walidacja w pluginie).
+# Wszystko, co daje przewagę (rangi, KC, przedmioty), zdobywa się wyłącznie w grze (EULA).
+sklep:
+  wlaczony: false
+  pozycje: {}
+
+# Logi kar LibertyBans → Discord #logi-kar (włączać na jednym serwerze z DiscordSRV)
+logi-kar:
+  co-ile-sekund: 15
 

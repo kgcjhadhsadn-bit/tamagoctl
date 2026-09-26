@@ -85,9 +85,9 @@ rangi:
     technik: '<dark_aqua><bold>Technik'
 
 smierc:
-  kick: '<red><bold>Zginąłeś!</bold></red>\n<gray>Na Kudłaczach śmierć oznacza wyrzucenie z serwera.\n<gray>Wróć, kiedy zechcesz — Twoje rzeczy zostały tam, gdzie zginąłeś.'
-  kick-blokada: '<red><bold>Zginąłeś!</bold></red>\n<gray>Na Kudłaczach śmierć oznacza wyrzucenie z serwera.\n<gray>Możesz wrócić za <white><czas></white>.\n<dark_gray>(Rangi od UVIP nie mają tej blokady)'
-  blokada-trwa: '<red>Niedawno zginąłeś na tym serwerze.\n<gray>Możesz wrócić za <white><czas></white>.'
+  kick: '<red><bold>Zginąłeś!</bold></red><newline><gray>Na Kudłaczach śmierć oznacza wyrzucenie z serwera.<newline><gray>Wróć, kiedy zechcesz — Twoje rzeczy zostały tam, gdzie zginąłeś.'
+  kick-blokada: '<red><bold>Zginąłeś!</bold></red><newline><gray>Na Kudłaczach śmierć oznacza wyrzucenie z serwera.<newline><gray>Możesz wrócić za <white><czas></white>.<newline><dark_gray>(Od rangi UVIP śmierć nie wyrzuca z serwera)'
+  blokada-trwa: '<red>Niedawno zginąłeś na tym serwerze.<newline><gray>Możesz wrócić za <white><czas></white>.'
 
 perki:
   bruk-ok: '<prefix><gray>Zamieniono <white><ilosc></white> bruku na kamień.'
@@ -255,6 +255,82 @@ edycja:
   kick: '<gold><bold>Nowa edycja #<numer>!</bold></gold>
 <gray>Survival startuje z nowym światem — wróć za minutę.'
 
+afk:
+  jestes-afk: '<prefix><gray>Jesteś AFK — nie zdobywasz punktów za czas gry. Rusz kamerą, aby wrócić.'
+  powrot: '<prefix><gray>Witaj z powrotem!'
+  ostrzezenie: '<prefix><red>Za <white><sekundy> s</white> zostaniesz wyrzucony za bezczynność (AFK). Rusz się!'
+  tytul: '<red><bold>AFK'
+  podtytul: '<gray>Kick za <white><sekundy> s</white> — rusz kamerą'
+  kick: '<red><bold>Wyrzucono za bezczynność</bold></red><newline><gray>Byłeś AFK przez <white><minuty> minut</white>.<newline><gray>Farmy AFK („afkczarki”) są zabronione — zapraszamy z powrotem!'
+  makro-personel: '<prefix><red><bold>[AFK]</bold></red> <white><gracz></white> <gray>klika w idealnie stałym rytmie (możliwe makro/autoklikacz).'
+
+konkurs:
+  menu-tytul: '<gold><bold>Kustosz</bold></gold> <dark_gray>» Kudłate Chaty'
+  menu-bedrock-otwarte: 'Konkurs budowlany Kudłate Chaty — zgłoszenia są otwarte! Stań w swojej budowli na własnej działce i zgłoś ją.'
+  menu-bedrock-zamkniete: 'Konkurs budowlany Kudłate Chaty — zgłoszenia przyjmujemy w ostatnich 2 tygodniach edycji.'
+  menu-zasady: '<yellow><bold>Zasady konkursu'
+  zasady:
+    - '<gradient:#ffb347:#ff7f00><bold>Kudłate Chaty — konkurs budowlany</bold></gradient>'
+    - '<gray>• Zgłoszenia w ostatnich 2 tygodniach edycji, jedno na gracza.'
+    - '<gray>• Zgłaszasz budowlę na własnej działce: stań w niej i użyj <yellow>/chaty zgloszenie [opis]</yellow>.'
+    - '<gray>• Budowle ocenia administracja (1–10) pod koniec edycji.'
+    - '<gray>• Nagrody: <light_purple>60 / 40 / 20 KC</light_purple> <gray>i tytuł dla podium.'
+  menu-moje: '<green><bold>Twoje zgłoszenie'
+  lore-miejsce: '<gray>Miejsce: <white><x> <y> <z>'
+  lore-bez-oceny: '<gray>Jeszcze nieocenione'
+  lore-ocena: '<gray>Ocena: <gold><ocena>/10'
+  menu-zglos: '<green><bold>Zgłoś budowlę'
+  menu-zglos-opis:
+    - '<gray>Zgłasza miejsce, w którym stoisz.'
+    - '<gray>Musi to być Twoja działka.'
+  menu-zamkniete: '<red>Zgłoszenia są zamknięte'
+  nie-twoja-dzialka: '<prefix><red>Stań w swojej budowli na <bold>własnej</bold> działce, aby ją zgłosić.'
+  zamkniete: '<prefix><red>Zgłoszenia do Kudłatych Chat przyjmujemy tylko w ostatnich 2 tygodniach edycji.'
+  zgloszono: '<prefix><green>Twoja budowla została zgłoszona do konkursu Kudłate Chaty! Powodzenia!'
+  juz-zgloszono: '<prefix><red>Masz już zgłoszenie w tej edycji (wycofaj je: /chaty wycofaj).'
+  ogloszenie-zgloszenia: '<prefix><white><gracz></white> <gray>zgłosił budowlę do konkursu <gold>Kudłate Chaty</gold>!'
+  wycofano: '<prefix><gray>Zgłoszenie wycofane.'
+  nie-wycofano: '<prefix><red>Nie masz zgłoszenia albo okno zgłoszeń jest zamknięte.'
+  brak-swiata: '<prefix><red>Świat tego zgłoszenia nie istnieje.'
+  lista-naglowek: '<prefix><gold>Zgłoszenia Kudłatych Chat (<ilosc>):'
+  lista-wpis: '<gray>• <white><gracz></white> <gray>— ocena <gold><ocena></gold> <dark_gray><opis>'
+  brak-zgloszenia: '<prefix><red>Brak zgłoszenia gracza <white><gracz></white>.'
+  uzycie-ocen: '<prefix><gray>Użycie: <yellow>/chaty ocen <nick> <1-10>'
+  oceniono: '<prefix><gray>Oceniono budowlę gracza <white><gracz></white>: <gold><ocena>/10'
+  brak-ocen: '<prefix><red>Brak ocenionych zgłoszeń — najpierw /chaty ocen.'
+  juz-rozdano: '<prefix><red>Nagrody za tę edycję zostały już rozdane.'
+  wyniki-naglowek: '<prefix><gold><bold>Wyniki Kudłatych Chat — edycja <edycja>:'
+  wyniki-wpis: '<gold>  <miejsce>. <white><gracz></white> <gray>— ocena <gold><ocena>/10</gold>, <light_purple>+<kc> KC</light_purple> i tytuł'
+  discord-wyniki: ':house_with_garden: **Wyniki konkursu Kudłate Chaty — edycja <edycja>:**'
+  okno: '<prefix><gray>Okno zgłoszeń: <white><tryb>'
+
+restart:
+  ostrzezenie: '<prefix><gold>Codzienny restart serwera za <white><minuty> min</white>. <gray>Zabezpiecz swoje rzeczy!'
+  tytul: '<gold><bold>Restart serwera'
+  podtytul: '<gray>za <white><minuty> min'
+  kick: '<gold><bold>Codzienny restart serwera</bold></gold><newline><gray>Wróć za minutę — do zobaczenia!'
+
+parkour:
+  start: '<prefix><aqua>Start parkouru!</aqua> <gray>Powodzenia — spadek cofa do punktu kontrolnego.'
+  punkt-kontrolny: '<prefix><aqua>Punkt kontrolny <white><numer></white> <gray>(<white><czas></white>)'
+  spadek: '<prefix><gray>Spadłeś — wracasz do ostatniego punktu kontrolnego.'
+  meta: '<prefix><aqua>Meta!</aqua> <gray>Czas: <white><czas></white> <dark_gray>(rekord: <rekord>)'
+  meta-rekord: '<prefix><gold><bold>Nowy rekord!</bold></gold> <gray>Czas: <white><czas></white>'
+  meta-pierwszy: '<prefix><aqua>Pierwsze przejście!</aqua> <gray>Czas: <white><czas></white>'
+  rekord-serwera: '<prefix><gold><bold>Rekord parkouru!</bold></gold> <white><gracz></white> <gray>przeszedł trasę w <white><czas></white>!'
+  top-naglowek: '<prefix><aqua><bold>Najlepsze czasy parkouru:'
+  top-pusty: '<gray>  Nikt jeszcze nie przeszedł parkouru.'
+  top-wpis: '<gray>  <miejsce>. <white><gracz></white> <gray>— <aqua><czas>'
+  wyjscie: '<prefix><gray>Przerwano parkour.'
+  teleport: '<prefix><gray>Start parkouru — wejdź na płytkę, aby zacząć.'
+
+sklep:
+  wylaczony: '<prefix><gray>Sklep jest wyłączony. <white>Wszystko na Kudłaczach zdobywa się w grze</white> — rangi i Kłaki Czarodzieja nie są na sprzedaż.'
+  naglowek: '<prefix><gray>Sklep kosmetyczny (wyłącznie wygląd, bez przewag w grze):'
+  pozycja: '<gray>• <nazwa> <dark_gray>— <white><cena> zł'
+  brak-pozycji: '<prefix><red>Nie ma pozycji <pozycja>.'
+  wydano: '<prefix><gray>Wydano <white><pozycja></white> graczowi <white><gracz></white>.'
+
 regulamin:
   - '<gradient:#c77dff:#7b2cbf><bold>Regulamin Kudłaczy</bold></gradient>'
   - '<white>1.</white> <gray>Poza działkami survival jest brutalny: wolno walczyć, kraść i oszukiwać.'
@@ -264,5 +340,5 @@ regulamin:
   - '<white>5.</white> <gray>Zakaz reklamy innych serwerów, spamu, floodu i pisania CAPSEM.'
   - '<white>6.</white> <gray>Zakaz handlu przedmiotami, walutą i kontami za prawdziwe pieniądze.'
   - '<white>7.</white> <gray>Szanuj innych graczy i administrację — bez obrażania i dyskryminacji.'
-  - '<white>8.</white> <gray>Śmierć = wyrzucenie z serwera (na survivalu blokada 5 min, od UVIP bez blokady).'
+  - '<white>8.</white> <gray>Śmierć = wyrzucenie z serwera (na survivalu blokada 5 min; od UVIP śmierć nie wyrzuca).'
   - '<dark_gray>Pełna treść: docs/REGULAMIN.md • nieznajomość regulaminu nie zwalnia z jego przestrzegania.'

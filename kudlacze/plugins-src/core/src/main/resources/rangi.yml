@@ -47,7 +47,7 @@ rangi:
     ikona: TOTEM_OF_UNDYING
     perki:
       - '60 działek, 20 domów'
-      - '/back, brak blokady po śmierci'
+      - '/back, śmierć bez kicka z serwera'
       - 'wyłączanie PvP na wybranych działkach'
   tytan:
     nazwa: '<gradient:#c77dff:#7b2cbf><bold>TYTAN</bold></gradient>'

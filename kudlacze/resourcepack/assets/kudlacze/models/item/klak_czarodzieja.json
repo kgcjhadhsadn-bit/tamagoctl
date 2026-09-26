@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "kudlacze:item/klak_czarodzieja"
+  }
+}

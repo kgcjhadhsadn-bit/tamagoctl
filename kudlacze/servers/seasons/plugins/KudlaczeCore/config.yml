@@ -33,6 +33,12 @@ moduly:
   sezony: true
   smok: true
   edycje: false
+  afk: true
+  konkurs: false
+  parkour: false
+  sklep: true
+  logi-kar: false
+  restart: true
 
 # Seasons: sam kick po śmierci (bez blokady)
 smierc:

@@ -24,6 +24,16 @@ public final class Schedules {
         return candidate.toInstant();
     }
 
+    /** Najbliższa podana godzina (codziennie) ściśle po {@code now}, np. restart o 05:00. */
+    public static Instant nextDaily(Instant now, ZoneId zone, LocalTime time) {
+        ZonedDateTime local = now.atZone(zone);
+        ZonedDateTime candidate = local.toLocalDate().atTime(time).atZone(zone);
+        if (!candidate.toInstant().isAfter(now)) {
+            candidate = local.toLocalDate().plusDays(1).atTime(time).atZone(zone);
+        }
+        return candidate.toInstant();
+    }
+
     /** Najbliższy dzień miesiąca (np. 1.) o danej godzinie ściśle po {@code now}. */
     public static Instant nextMonthly(Instant now, ZoneId zone, int dayOfMonth, LocalTime time) {
         ZonedDateTime local = now.atZone(zone);

@@ -38,6 +38,8 @@ import java.util.regex.Pattern;
  *       gdy zmieniła się jego treść albo świat został odbudowany.</li>
  * </ol>
  * W komendach działają placeholdery {@code {swiat}}, {@code {sx}}, {@code {sy+1}}, {@code {sz-6.5}}.
+ * Dyrektywa {@code @zaladuj x1 z1 x2 z2} ładuje chunki obszaru (bilet pluginu do końca bootstrapu) — potrzebne
+ * dla {@code setblock}/{@code fill}, bo w 26.x chunki spawnu nie są stale załadowane.
  */
 public final class BootstrapModule implements CoreModule {
 
@@ -145,9 +147,17 @@ public final class BootstrapModule implements CoreModule {
         }
         ctx.plugin.getLogger().info("Wykonuję bootstrap.txt (" + queue.size() + " komend)…");
         CommandSender console = Bukkit.getConsoleSender();
+        java.util.List<long[]> tickets = new java.util.ArrayList<>();
         runner = Bukkit.getScheduler().runTaskTimer(ctx.plugin, () -> {
             String cmd = queue.poll();
+            if (cmd != null && cmd.startsWith("@zaladuj")) {
+                loadArea(world, cmd, tickets);
+                return;
+            }
             if (cmd == null) {
+                for (long[] t : tickets) {
+                    world.removePluginChunkTicket((int) t[0], (int) t[1], ctx.plugin);
+                }
                 runner.cancel();
                 runner = null;
                 ctx.tasks.runAsync(() -> ctx.kv.put("bootstrap." + ctx.server() + ".hash", hash));
@@ -160,6 +170,26 @@ public final class BootstrapModule implements CoreModule {
                 ctx.plugin.getLogger().warning("Komenda bootstrapu nie powiodła się: " + cmd + " — " + e.getMessage());
             }
         }, 1L, 2L);
+    }
+
+    /** {@code @zaladuj x1 z1 x2 z2} (współrzędne bloków) — synchroniczne załadowanie chunków obszaru. */
+    private void loadArea(World world, String directive, java.util.List<long[]> tickets) {
+        String[] p = directive.trim().split("\\s+");
+        if (p.length != 5) {
+            ctx.plugin.getLogger().warning("Zła dyrektywa bootstrapu: " + directive);
+            return;
+        }
+        int x1 = (int) Math.floor(Double.parseDouble(p[1])) >> 4;
+        int z1 = (int) Math.floor(Double.parseDouble(p[2])) >> 4;
+        int x2 = (int) Math.floor(Double.parseDouble(p[3])) >> 4;
+        int z2 = (int) Math.floor(Double.parseDouble(p[4])) >> 4;
+        for (int cx = Math.min(x1, x2); cx <= Math.max(x1, x2); cx++) {
+            for (int cz = Math.min(z1, z2); cz <= Math.max(z1, z2); cz++) {
+                if (world.addPluginChunkTicket(cx, cz, ctx.plugin)) {
+                    tickets.add(new long[]{cx, cz});
+                }
+            }
+        }
     }
 
     /** Podstawia {swiat} i współrzędne placu (także z przesunięciem, np. {sx+5.5}). */

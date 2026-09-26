@@ -168,6 +168,12 @@ public class KudlaczeCore extends JavaPlugin implements Listener {
         modules.add(new pl.kudlacze.core.seasons.SeasonsModule(c));
         modules.add(new pl.kudlacze.core.dragon.DragonModule(c));
         modules.add(new pl.kudlacze.core.edition.EditionModule(c));
+        modules.add(new pl.kudlacze.core.afk.AfkModule(c));
+        modules.add(new pl.kudlacze.core.contest.ContestModule(c));
+        modules.add(new pl.kudlacze.core.parkour.ParkourModule(c));
+        modules.add(new pl.kudlacze.core.shop.ShopModule(c));
+        modules.add(new pl.kudlacze.core.punish.PunishmentLogModule(c));
+        modules.add(new pl.kudlacze.core.restart.RestartModule(c));
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

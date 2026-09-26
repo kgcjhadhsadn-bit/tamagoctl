@@ -76,4 +76,14 @@ class SchedulesTest {
         // 00:30 w poniedziałek w Warszawie to już nowy tydzień
         assertEquals(Instant.parse("2026-09-27T22:00:00Z"), Schedules.weekStart(Instant.parse("2026-09-27T22:30:00Z"), WAW));
     }
+
+    @Test
+    void dailyRestartAtFive() {
+        LocalTime five = LocalTime.of(5, 0);
+        // 25.09 23:00 w Warszawie → 26.09 05:00 (03:00 UTC)
+        assertEquals(Instant.parse("2026-09-26T03:00:00Z"), Schedules.nextDaily(Instant.parse("2026-09-25T21:00:00Z"), WAW, five));
+        assertEquals(Instant.parse("2026-09-27T03:00:00Z"), Schedules.nextDaily(Instant.parse("2026-09-26T03:00:00Z"), WAW, five));
+        // noc zmiany czasu (25.10): 05:00 czasu zimowego = 04:00 UTC
+        assertEquals(Instant.parse("2026-10-25T04:00:00Z"), Schedules.nextDaily(Instant.parse("2026-10-24T22:00:00Z"), WAW, five));
+    }
 }

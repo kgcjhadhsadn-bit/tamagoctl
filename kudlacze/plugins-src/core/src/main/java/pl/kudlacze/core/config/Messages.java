@@ -78,7 +78,8 @@ public final class Messages {
                 .resolvers(resolvers)
                 .resolver(Placeholder.parsed("prefix", config.getString("prefix", "")))
                 .build();
-        return MM.deserialize(miniMessage, all);
+        // „\n” wpisane w YAML w pojedynczych cudzysłowach to dosłownie backslash + n — zamieniamy na nową linię
+        return MM.deserialize(miniMessage.replace("\\n", "\n"), all);
     }
 
     public void send(Audience audience, String key, TagResolver... resolvers) {

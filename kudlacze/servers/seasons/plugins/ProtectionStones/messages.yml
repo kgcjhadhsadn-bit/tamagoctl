@@ -1,0 +1,344 @@
+# ProtectionStones — komunikaty po polsku (Kudłacze). Waluta: zł (EssentialsX).
+cooldown: '&6Uwaga: &7odczekaj %time% s przed postawieniem kolejnego kamienia!'
+no_such_command: '&cNie ma takiej komendy. Wpisz /ps help, aby zobaczyć pomoc.'
+no_access: '&cNie możesz tego tutaj zrobić.'
+no_room_in_inventory: '&cNie masz miejsca w ekwipunku.'
+no_room_dropping_on_floor: '&cNie masz miejsca w ekwipunku — przedmiot wypadł na ziemię.'
+invalid_block: '&cTo nie jest kamień działki.'
+not_enough_money: '&cMasz za mało pieniędzy! Cena: %price% zł.'
+paid_money: '&bZapłacono %price% zł.'
+invalid_world: '&cNieprawidłowy świat.'
+must_be_player: '&cTej komendy może użyć tylko gracz.'
+go_back_page: Poprzednia strona.
+go_next_page: Następna strona.
+page_does_not_exist: '&cTaka strona nie istnieje.'
+help: '&8&m=====&r Działki — pomoc &8&m=====
+
+  &b> &7/ps help'
+help_next: '&7Wpisz /ps help %page%, aby przejść do następnej strony!'
+command_requires_player_name: '&cTa komenda wymaga nicku gracza.'
+no_permission_toggle: '&cNie masz uprawnień do komendy toggle.'
+no_permission_create: '&cNie masz uprawnień do stawiania kamieni działek.'
+no_permission_create_specific: '&cNie masz uprawnień do stawiania tego rodzaju kamienia działki.'
+no_permission_destroy: '&cNie masz uprawnień do niszczenia kamieni działek.'
+no_permission_members: '&cNie masz uprawnień do zarządzania członkami.'
+no_permission_owners: '&cNie masz uprawnień do zarządzania właścicielami.'
+no_permission_admin: '&cNie masz uprawnień do tej komendy.'
+no_permission_count: '&cNie masz uprawnień do tej komendy.'
+no_permission_count_others: '&cNie masz uprawnień do tej komendy.'
+no_permission_flags: '&cNie masz uprawnień do zmiany flag.'
+no_permission_per_flag: '&cNie masz uprawnień do tej flagi.'
+no_permission_rent: '&cNie masz uprawnień do wynajmu.'
+no_permission_tax: '&cNie masz uprawnień do komendy podatków.'
+no_permission_buysell: '&cNie masz uprawnień do kupna i sprzedaży działek.'
+no_permission_unhide: '&cNie masz uprawnień do odkrywania kamieni działek.'
+no_permission_hide: '&cNie masz uprawnień do ukrywania kamieni działek.'
+no_permission_info: '&cNie masz uprawnień do informacji o działce.'
+no_permission_priority: '&cNie masz uprawnień do zmiany priorytetu.'
+no_permission_region: '&cNie masz uprawnień do komend działek innych graczy.'
+no_permission_tp: '&cNie masz uprawnień do teleportu na działki innych graczy.'
+no_permission_home: '&cNie masz uprawnień do teleportu na swoje działki.'
+no_permission_unclaim: '&cNie masz uprawnień do komendy unclaim.'
+no_permission_unclaim_remote: '&cNie masz uprawnień do zdalnego unclaim.'
+no_permission_view: '&cNie masz uprawnień do podglądu granic.'
+no_permission_give: '&cNie masz uprawnień do komendy give.'
+no_permission_get: '&cNie masz uprawnień do komendy get.'
+no_permission_sethome: '&cNie masz uprawnień do ustawiania domu działki.'
+no_permission_list: '&cNie masz uprawnień do listy działek.'
+no_permission_list_others: '&cNie masz uprawnień do listy działek innych graczy.'
+no_permission_name: '&cNie masz uprawnień do nazywania działek.'
+no_permission_setparent: '&cNie masz uprawnień do komendy setparent.'
+no_permission_setparent_others: '&cNie możesz dziedziczyć z działek, których nie jesteś właścicielem.'
+no_permission_merge: '&cNie masz uprawnień do /ps merge.'
+psregion:
+  added_to_region: '&b%player%&7 został dodany do działki.'
+  added_to_region_specific: '&b%player%&7 został dodany do działki %region%.'
+  removed_from_region: '&b%player%&7 został usunięty z działki.'
+  removed_from_region_specific: '&b%player%&7 został usunięty z działki %region%.'
+  not_in_region: '&cNie stoisz na działce!'
+  player_not_found: '&cNie znaleziono gracza.'
+  not_ps_region: '&cTo nie jest działka.'
+  region_does_not_exist: '&cTaka działka nie istnieje.'
+  no_regions_owned: '&cNie masz działek w tym świecie!'
+  no_region_permission: '&cNie masz uprawnień, aby zrobić to na tej działce.'
+  protected: '&bTen teren jest teraz chroniony — to Twoja działka!'
+  no_longer_protected: '&eTen teren nie jest już chroniony.'
+  cant_protect_that: '&cNie możesz chronić tego terenu.'
+  reached_region_limit: '&cOsiągnięto limit działek (%limit%). Wyższa ranga = więcej działek (/rangi).'
+  reached_per_block_region_limit: '&cOsiągnięto limit działek tego rodzaju (%limit%).'
+  world_denied_create: '&cW tym świecie nie można tworzyć działek.'
+  region_overlap: '&cNie możesz postawić tu kamienia — działka nachodziłaby na inną.'
+  region_too_close: '&cKamień działki musi stać co najmniej %num% bloków od granicy innych działek!'
+  cant_teleport: '&cTeleport zablokowany przez działkę!'
+  specify_id_instead_of_alias: "&7Znaleziono kilka działek o tej nazwie! Użyj ID.\n Działki o tej nazwie: &b%regions%"
+  region_not_adjacent: '&cPrzekroczono limit działek, które nie sąsiadują ze sobą! Postaw kamień bliżej swoich działek.'
+  not_overlapping: '&cTe działki nie nachodzą na siebie!'
+  multi_region_does_not_exist: Jedna z tych działek nie istnieje!
+  no_region_holes: '&cWykryto niechroniony teren wewnątrz działki! To niedozwolone!'
+  delete_region_prevented: '&7Nie można usunąć działki — prawdopodobnie powstałaby dziura w istniejącej działce.'
+  not_owner: '&cNie jesteś właścicielem tej działki!'
+  cannot_merge_rented_region: '&cNie można połączyć działek, bo działka %region% jest w trakcie wynajmu!'
+  no_permission_region_type: '&cNie masz uprawnień do tego rodzaju działki.'
+  hidden: '&7Kamień działki jest teraz ukryty.'
+  must_be_placed_in_existing_region: '&cTo trzeba postawić wewnątrz istniejącej działki!'
+  already_in_location_is_hidden: '&cW tym miejscu jest już działka (może kamień jest ukryty?).'
+  cannot_remove_yourself_last_owner: '&cNie możesz się usunąć — jesteś ostatnim właścicielem.'
+  cannot_remove_yourself_all_regions: '&cZe względów bezpieczeństwa nie możesz usunąć się naraz ze wszystkich działek.'
+toggle:
+  help: '&b> &7/ps toggle|on|off'
+  help_desc: Włącza lub wyłącza stawianie kamieni działek.
+  toggle_on: '&bStawianie kamieni działek włączone.'
+  toggle_off: '&bStawianie kamieni działek wyłączone.'
+count:
+  count_help: '&b> &7/ps count [gracz (opcjonalnie)]'
+  count_help_desc: Liczba działek Twoich albo innego gracza.
+  personal_region_count: '&7Twoje działki w tym świecie: &b%num%'
+  personal_region_count_merged: '&7- licząc każdą połączoną działkę: &b%num%'
+  other_region_count: '&7Działki gracza %player% w tym świecie: &b%num%'
+  other_region_count_merged: '&7- licząc każdą połączoną działkę: &b%num%'
+flag:
+  help: '&b> &7/ps flag [flaga] [wartość|null|default]'
+  help_desc: Ustawia flagę na Twojej działce.
+  flag_set: '&7Flaga &b%flag%&7 została ustawiona.'
+  flag_not_set: '&7Flaga &b%flag%&7 &cnie&7 została ustawiona. Sprawdź wartość.'
+  flag_prevent_exploit: '&cWyłączone, aby zapobiec nadużyciom.'
+  flag_prevent_exploit_hover: '&cWyłączone ze względów bezpieczeństwa.'
+  gui_header: '&8&m=====&r Flagi (kliknij, aby zmienić) &8&m====='
+  gui_hover_set: '&bKliknij, aby ustawić.'
+  gui_hover_set_text: '&bKliknij, aby zmienić.&f
+
+    Obecna wartość:
+
+    %value%'
+  hover_change_group: Kliknij, aby flaga dotyczyła tylko grupy %group%.
+  hover_change_group_null: '&cNajpierw ustaw wartość flagi, potem zmień grupę.'
+rent:
+  help: '&b> &7/ps rent'
+  help_desc: Zarządzanie wynajmem działek.
+  help_header: '&8&m=====&r Wynajem — pomoc &8&m====='
+  already_renting: '&cDziałka jest już wynajmowana! Najpierw zakończ wynajem.'
+  not_rented: '&cTa działka nie jest wynajęta.'
+  lease_success: '&bUstalono warunki wynajmu:
+
+    &bCena: &7%price%
+
+    &bOkres płatności: &7%period%'
+  stopped: '&bWynajem zakończony.'
+  evicted: '&7Eksmitowano najemcę %tenant%.'
+  not_renting: '&cTa działka nie jest wystawiona do wynajęcia.'
+  paid_landlord: '&b%tenant%&7 zapłacił &b%price% zł&7 za wynajem &b%region%&7.'
+  paid_tenant: '&7Zapłacono &b%price% zł&7 graczowi &b%landlord%&7 za działkę &b%region%&7.'
+  renting_landlord: '&b%player%&7 wynajmuje teraz działkę &b%region%&7.'
+  renting_tenant: '&7Wynajmujesz działkę &b%region%&7 za &b%price% zł&7 na &b%period%&7.'
+  not_tenant: '&cNie jesteś najemcą tej działki!'
+  tenant_stopped_landlord: '&b%player%&7 przestał wynajmować działkę &b%region%&7. Jest znowu dostępna do wynajęcia.'
+  tenant_stopped_tenant: '&bPrzestałeś wynajmować działkę %region%.'
+  being_sold: '&cDziałka jest wystawiona na sprzedaż! Najpierw /ps sell stop.'
+  evict_no_money_tenant: '&7Zostałeś &ceksmitowany&7 z działki &b%region%&7 — brak pieniędzy (%price% zł) na czynsz.'
+  evict_no_money_landlord: '&b%tenant%&7 został &ceksmitowany&7 z działki &b%region%&7 — nie stać go na czynsz.'
+  cannot_rent_own_region: '&cNie możesz wynająć własnej działki!'
+  reached_limit: '&cOsiągnięto limit wynajmowanych działek!'
+  price_too_low: '&cZa niski czynsz (musi być wyższy niż %price%).'
+  price_too_high: '&cZa wysoki czynsz (musi być niższy niż %price%).'
+  period_too_short: '&cZa krótki okres wynajmu (musi być dłuższy niż %period% s).'
+  period_too_long: '&cZa długi okres wynajmu (musi być krótszy niż %period% s).'
+  period_invalid: '&cZły format okresu! Przykład: 24h = raz dziennie.'
+  cannot_break_while_renting: '&cNie możesz zniszczyć działki, która jest wynajmowana.'
+tax:
+  help: '&b> &7/ps tax'
+  help_desc: Podatki od działek.
+  help_header: '&8&m=====&r Podatki — pomoc &8&m====='
+  disabled_region: '&cPodatki są wyłączone dla tej działki.'
+  set_as_autopayer: '&7Podatki za działkę &b%region%&7 będą płacone automatycznie przez Ciebie.'
+  set_no_autopayer: '&7Podatki za działkę &b%region%&7 trzeba teraz płacić ręcznie.'
+  paid: '&7Zapłacono &b%amount% zł&7 podatku za działkę &b%region%&7.'
+  info_header: '&8&m=====&r Podatki (kliknij, aby zobaczyć więcej) &8&m====='
+  join_msg_pending_payments: '&7Masz &b%money% zł&7 zaległych podatków za działki!
+
+    Zobacz: /ps tax info.'
+  player_region_info: '&7> &b%region%&7 - &3%money% zł do zapłaty'
+  player_region_info_autopayer: '&7> &b%region%&7 - &3%money% zł do zapłaty&7 (płacisz automatycznie)'
+  click_to_show_more_info: Kliknij, aby zobaczyć więcej.
+  region_info_header: '&8&m=====&r %region% — podatki &8&m====='
+  region_info: '&9Stawka: &7%taxrate% zł (suma połączonych działek)
+
+    &9Czas między cyklami: &7%taxperiod%
+
+    &9Czas na zapłatę: &7%taxpaymentperiod%
+
+    &9Płaci automatycznie: &7%taxautopayer%
+
+    &9Zaległość: &7%taxowed% zł'
+  next_page: '&7Wpisz /ps tax info -p %page%, aby przejść do następnej strony!'
+buy:
+  help: '&b> &7/ps buy'
+  help_desc: Kup działkę, na której stoisz.
+  not_for_sale: '&cTa działka nie jest na sprzedaż.'
+  stop_sell: '&7Działka nie jest już na sprzedaż.'
+  sold_buyer: '&7Kupiono działkę &b%region%&7 za &b%price% zł&7 od &b%player%&7.'
+  sold_seller: '&7Sprzedano działkę &b%region%&7 za &b%price% zł&7 graczowi &b%player%&7.'
+sell:
+  help: '&b> &7/ps sell [cena|stop]'
+  help_desc: Wystaw na sprzedaż działkę, na której stoisz.
+  rented_out: '&cDziałka jest wynajmowana! Zakończ wynajem, aby ją sprzedać.'
+  for_sale: '&7Działka jest na sprzedaż za &b%price% zł&7.'
+visibility:
+  hide_help: '&b> &7/ps hide'
+  hide_help_desc: Ukrywa kamień działki.
+  unhide_help: '&b> &7/ps unhide'
+  unhide_help_desc: Odkrywa kamień działki.
+  already_not_hidden: '&7Kamień działki nie wygląda na ukryty...'
+  already_hidden: '&7Kamień działki jest już ukryty...'
+info:
+  help: '&b> &7/ps info members|owners|flags'
+  help_desc: Informacje o działce, na której stoisz.
+  header: '&8&m=====&r Działka — informacje &8&m====='
+  type2: '&9Rodzaj: &7%type%'
+  may_be_merged: (może być połączona z innymi rodzajami)
+  merged2: '&9Połączone działki: &7%merged%'
+  members2: '&9Członkowie: &7%members%'
+  no_members: '&c(brak członków)'
+  owners2: '&9Właściciele: &7%owners%'
+  no_owners: '&c(brak właścicieli)'
+  flags2: '&9Flagi: &7%flags%'
+  no_flags: (brak)
+  region2: '&9Działka: &b%region%'
+  priority2: '&9Priorytet: &b%priority%'
+  parent2: '&9Nadrzędna: &b%parentregion%'
+  bounds_xyz: '&9Granice: &b(%minx%,%miny%,%minz%) -> (%maxx%,%maxy%,%maxz%)'
+  bounds_xz: '&9Granice: &b(%minx%, %minz%) -> (%maxx%, %maxz%)'
+  seller2: '&9Sprzedający: &7%seller%'
+  price2: '&9Cena: &7%price%'
+  tenant2: '&9Najemca: &7%tenant%'
+  landlord2: '&9Wynajmujący: &7%landlord%'
+  rent2: '&9Czynsz: &7%rent%'
+  available_for_sale: '&bDziałka na sprzedaż!'
+  available_for_rent: '&bDziałka do wynajęcia!'
+priority:
+  help: '&b> &7/ps priority [liczba|null]'
+  help_desc: Ustawia priorytet działki.
+  info: '&7Priorytet: %priority%'
+  set: '&ePriorytet ustawiony.'
+  error: '&cBłędna wartość — sprawdź jeszcze raz.'
+region:
+  help: '&b> &7/ps region [list|remove|disown] [gracz]'
+  help_desc: Informacje o działkach i ich edycja (swoich lub innych graczy).
+  not_found_for_player: '&7Brak działek gracza %player% w tym świecie.'
+  list: '&7Działki gracza %player% w tym świecie: &b%regions%'
+  remove: '&eUsunięto działki gracza %player% w tym świecie i wypisano go ze współwłasności.'
+  disown: '&e%player% nie jest już właścicielem żadnej działki w tym świecie.'
+  error_search: '&cBłąd wyszukiwania działek gracza %player%. Sprawdź nick.'
+tp:
+  help: '&b> &7/ps tp [id/gracz] [numer (opcjonalnie)]'
+  help_desc: Teleport na działkę wybranego gracza.
+  number_above_zero: '&cPodaj liczbę większą od 0.'
+  valid_number: '&cPodaj poprawną liczbę.'
+  only_has_regions: '&c%player% ma w tym świecie tylko %num% działek!'
+  tping: '&aTeleportacja...'
+  error_name: '&cBłąd teleportu na działkę (nazwa regionu WorldGuard)!'
+  error_tp: '&cNie znaleziono działki do teleportu!'
+  in_seconds: '&7Teleportacja za &b%seconds%&7 s.'
+  cancelled_moved: '&cTeleport anulowany — ruszyłeś się!'
+home:
+  help: '&b> &7/ps home [nazwa/id]'
+  help_desc: Teleport na jedną z Twoich działek.
+  header: '&8&m=====&r Twoje działki (kliknij, aby się teleportować) &8&m====='
+  click_to_tp: Kliknij, aby się teleportować!
+  next_page: '&7Wpisz /ps home -p %page%, aby przejść do następnej strony!'
+unclaim:
+  help: '&b> &7/ps unclaim'
+  help_desc: Zabiera kamień działki i usuwa działkę.
+  header: '&8&m=====&r Usuń działkę (kliknij) &8&m====='
+view:
+  help: '&b> &7/ps view'
+  help_desc: Pokazuje granice działki.
+  cooldown: '&cOdczekaj chwilę przed ponownym /ps view.'
+  generating: '&7Rysuję granicę...'
+  generate_done: '&aGotowe! Granica zniknie po 30 sekundach.'
+  removing: '&bUsuwam granicę...
+
+    &aJeśli nadal widzisz bloki-duchy, wejdź ponownie na serwer.'
+admin:
+  help: '&b> &7/ps admin'
+  help_desc: Wpisz /ps admin help, aby zobaczyć więcej.
+  cleanup_header: '&eCzyszczenie %arg% %days% dni
+
+    ================'
+  cleanup_footer: '&e================
+
+    Zakończono czyszczenie %arg%.'
+  hide_toggled: '&eWszystkie kamienie działek w tym świecie: %message%.'
+  last_logon: '&e%player% grał ostatnio %days% dni temu.'
+  is_banned: '&e%player% ma bana.'
+  error_parsing: '&cBłędna liczba dni.'
+  console_world: '&cPodaj świat jako ostatni parametr.'
+  lastlogons_header: '&e%days% i więcej dni:
+
+    ================'
+  lastlogons_line: '&e%player% %time% dni'
+  lastlogons_footer: '&e================
+
+    Pokazano graczy: %count%
+
+    Sprawdzono graczy: %checked%'
+reload:
+  help: '&b> &7/ps reload'
+  help_desc: Ponowne wczytanie konfiguracji.
+  start: '&bWczytuję konfigurację...'
+  complete: '&bKonfiguracja wczytana!'
+addremove:
+  help: '&b> &7/ps add|remove [gracz]'
+  help_desc: Dodaje lub usuwa członka działki.
+  owner_help: '&b> &7/ps addowner|removeowner [gracz]'
+  owner_help_desc: Dodaje lub usuwa współwłaściciela działki.
+  player_reached_limit: '&cTen gracz osiągnął limit działek.'
+  player_needs_to_be_online: '&cGracz musi być online, aby go dodać.'
+get:
+  help: '&b> &7/ps get [kamień]'
+  help_desc: Kup kamień działki.
+  gotten: '&bKamień działki trafił do ekwipunku!'
+  no_permission_block: '&cNie masz uprawnień do tego kamienia.'
+  header: '&8&m=====&r Kamienie działek (kliknij, aby kupić) &8&m====='
+  gui_block: '&7> &b%alias% &7- %description% (&f%price% zł&7)'
+  gui_hover: 'Kliknij, aby kupić: %alias%!'
+give:
+  help: '&b> &7/ps give [kamień] [gracz] [ilość (opcjonalnie)]'
+  help_desc: Daje graczowi kamień działki.
+  given: '&7Dano &b%block%&7 graczowi &b%player%&7.'
+  no_inventory_room: '&cGracz nie ma miejsca w ekwipunku.'
+sethome:
+  help: '&b> &7/ps sethome'
+  help_desc: Ustawia dom działki w miejscu, w którym stoisz.
+  set: '&7Dom działki &b%psid%&7 ustawiony w Twojej lokalizacji.'
+list:
+  help: '&b> &7/ps list [gracz (opcjonalnie)]'
+  help_desc: Lista działek Twoich albo innego gracza.
+  header: '&8&m=====&r Działki gracza %player% &8&m====='
+  owner: '&7Właściciel:'
+  member: '&7Członek:'
+  no_regions: '&7Nie masz żadnej działki i nie jesteś członkiem żadnej.'
+  no_regions_player: '&b%player% &7nie ma działek i nie jest członkiem żadnej.'
+name:
+  help: '&b> &7/ps name [nazwa|none]'
+  help_desc: Nadaje działce nazwę, żeby łatwiej ją rozpoznać.
+  removed: '&7Usunięto nazwę działki %id%.'
+  set_name: '&7Działka %id% nazywa się teraz &b%name%&7.'
+  taken: '&7Nazwa &b%name%&7 jest już zajęta! Wybierz inną.'
+setparent:
+  help: '&b> &7/ps setparent [działka|none]'
+  help_desc: Działka dziedziczy właściwości innej (właściciele, członkowie, flagi).
+  success: '&7Działka &b%id%&7 dziedziczy teraz z &b%parent%&7.'
+  success_remove: '&7Usunięto działkę nadrzędną dla &b%id%&7.'
+  circular_inheritance: '&cWykryto dziedziczenie w kółko (działka nadrzędna już dziedziczy z tej?). Nie ustawiono.'
+merge:
+  help: '&b> &7/ps merge'
+  help_desc: Łączy działkę, na której stoisz, z nachodzącymi na nią działkami.
+  disabled: Łączenie działek jest wyłączone w konfiguracji!
+  merged: '&bDziałki zostały połączone!'
+  header: '&8&m=====&r Połącz %region% (kliknij) &8&m====='
+  warning: '&7Uwaga: wszystkie ustawienia obecnej działki zostaną usunięte!'
+  not_allowed: '&cTego rodzaju działki nie można łączyć.'
+  into: '&bTa działka nachodzi na inne, z którymi możesz ją połączyć!'
+  no_region: '&7Brak nachodzących działek do połączenia.'
+  click_to_merge: Kliknij, aby połączyć z %region%!
+  auto_merged: '&7Działka automatycznie połączona z &b%region%&7.'
